@@ -1,0 +1,5 @@
+*.dll
+
+Il2CppAssemblies/
+net6/
+net35/
