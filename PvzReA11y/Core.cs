@@ -1,4 +1,5 @@
 ﻿using MelonLoader;
+using PvzReA11y.A11yPatch;
 
 [assembly: MelonInfo(typeof(PvzReA11y.Core),
     "PvzReA11y", "1.0.0", "inkydragon",
@@ -15,6 +16,9 @@ namespace PvzReA11y;
  */
 public class Core : MelonMod
 {
+    public static MelonLogger.Instance gLogger;
+    public static HarmonyLib.Harmony gHarmony;
+
     // OnEarlyInitializeMelon
 
     /// <summary>
@@ -22,6 +26,10 @@ public class Core : MelonMod
     /// </summary>
     public override void OnInitializeMelon()
     {
+        gLogger = LoggerInstance;
+        gHarmony = HarmonyInstance;
+
+        A11yPatches.PatchAll();
         LoggerInstance.Msg("Mod Initialized");
     }
 
