@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
+using Il2CppReloaded.Gameplay;
 using System.Text;
-using static MelonLoader.MelonLogger;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -92,36 +92,34 @@ internal class BoardPatch
         PrintBoardDynamicInfo();
     }
 
-    // Plant AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
     [HarmonyPatch("AddPlant")]
     [HarmonyPostfix]
-    static void AddPlant()
+    static void AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
     {
-        Core.gLogger.Msg($"Board.AddPlant(theGridX, theGridY, theSeedType, theImitaterType)");
+        Core.gLogger.Msg($"Board.AddPlant(X={theGridX}, Y={theGridY}, SeedType={theSeedType}, ImitaterType={theImitaterType})");
     }
 
-    // Coin AddCoin(float theX, float theY, CoinType theCoinType, CoinMotion theCoinMotion)
+    // 包含阳光的下落
     [HarmonyPatch("AddCoin")]
     [HarmonyPostfix]
-    static void AddCoin()
+    static void AddCoin(float theX, float theY, CoinType theCoinType, CoinMotion theCoinMotion)
     {
-        Core.gLogger.Msg($"Board.AddCoin(theX, theY, theCoinType, theCoinMotion)");
+        Core.gLogger.Msg($"Board.AddCoin(X={theX}, Y={theY}, CoinType={theCoinType}, CoinMotion={theCoinMotion})");
     }
 
-    // Zombie AddZombie(ZombieType theZombieType, int theFromWave, bool shakeBrush = true)
+    // 普通的僵尸按波次放置
     [HarmonyPatch("AddZombie")]
     [HarmonyPostfix]
-    static void AddZombie()
+    static void AddZombie(ZombieType theZombieType, int theFromWave, bool shakeBrush)
     {
-        Core.gLogger.Msg($"Board.AddZombie(theZombieType, theFromWave, shakeBrush = true)");
+        Core.gLogger.Msg($"Board.AddZombie(ZombieType={theZombieType}, FromWave={theFromWave}, shakeBrush={shakeBrush})");
     }
 
-    // Zombie AddZombieAtCell(ZombieType theZombieType, int x, int y)
     [HarmonyPatch("AddZombieAtCell")]
     [HarmonyPostfix]
-    static void AddZombieAtCell()
+    static void AddZombieAtCell(ZombieType theZombieType, int x, int y)
     {
-        Core.gLogger.Msg($"Board.AddZombieAtCell(theZombieType, x, y)");
+        Core.gLogger.Msg($"Board.AddZombieAtCell(ZombieType={theZombieType}, x={x}, y={y})");
     }
 
     [HarmonyPatch("Update")]
