@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using HarmonyLib;
+using MelonLoader;
 using PvzReA11y.A11yPatch;
 
 [assembly: MelonInfo(typeof(PvzReA11y.Core),
@@ -30,6 +31,7 @@ public class Core : MelonMod
         gHarmony = HarmonyInstance;
 
         A11yPatches.PatchAll();
+        gHarmony.PatchAll();
         LoggerInstance.Msg("Mod Initialized");
     }
 
