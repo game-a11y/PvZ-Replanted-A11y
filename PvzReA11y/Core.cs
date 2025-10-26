@@ -1,6 +1,4 @@
-﻿using HarmonyLib;
-using MelonLoader;
-using PvzReA11y.A11yPatch;
+﻿using MelonLoader;
 
 [assembly: MelonInfo(typeof(PvzReA11y.Core),
     "A11y Mod", "1.0.0", "inkydragon",
