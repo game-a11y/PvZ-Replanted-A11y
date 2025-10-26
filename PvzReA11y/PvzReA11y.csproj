@@ -466,6 +466,7 @@
 
 	<ItemGroup>
 		<Compile Include="A11yPatches.cs" />
+		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\TextMeshPatch.cs" />
 		<Compile Include="A11yPatch\TextPatch.cs" />
