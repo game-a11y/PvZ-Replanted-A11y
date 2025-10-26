@@ -27,17 +27,17 @@ internal class BoardPatch
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine($"Board#{BoardPatch.cachedBoard?.GetHashCode()} Info:");
+        sb.AppendLine($"Board#{BoardPatch.cachedBoard?.GetHashCode()} Static Info:");
         sb.AppendLine($"  NumRows = {BoardPatch.cachedBoard?.GetNumRows()}");
-        sb.AppendLine($"  HasProgressMeter = {BoardPatch.cachedBoard?.HasProgressMeter()}");
-
+        sb.AppendLine($"  StageHas6Rows = {BoardPatch.cachedBoard?.StageHas6Rows()}");
         sb.AppendLine($"  StageIsNight  = {BoardPatch.cachedBoard?.StageIsNight()}");
         sb.AppendLine($"  StageHasPool  = {BoardPatch.cachedBoard?.StageHasPool()}");
-        sb.AppendLine($"  StageHas6Rows = {BoardPatch.cachedBoard?.StageHas6Rows()}");
         sb.AppendLine($"  StageHasFog   = {BoardPatch.cachedBoard?.StageHasFog()}");
+        sb.AppendLine($"  StageHasRoof  = {BoardPatch.cachedBoard?.StageHasRoof()}");
+        sb.AppendLine($"  StageHasNoGrass     = {BoardPatch.cachedBoard?.StageHasNoGrass()}");
         sb.AppendLine($"  StageHasGraveStones = {BoardPatch.cachedBoard?.StageHasGraveStones()}");
-        sb.AppendLine($"  StageHasRoof = {BoardPatch.cachedBoard?.StageHasRoof()}");
-        sb.AppendLine($"  StageHasNoGrass   = {BoardPatch.cachedBoard?.StageHasNoGrass()}");
+        // UI
+        sb.AppendLine($"  HasProgressMeter = {BoardPatch.cachedBoard?.HasProgressMeter()}");
         Core.gLogger.Msg(sb.ToString());
     }
 
@@ -64,7 +64,6 @@ internal class BoardPatch
         sb.AppendLine($"  NumSeedsInBank = {BoardPatch.cachedBoard?.GetNumSeedsInBank()}");
         sb.AppendLine($"  CountSunFlowers = {BoardPatch.cachedBoard?.CountSunFlowers()}");
         sb.AppendLine($"  GetGraveStoneCount = {BoardPatch.cachedBoard?.GetGraveStoneCount()}");
-        sb.AppendLine($"  GetButterReanimation = {BoardPatch.cachedBoard?.GetButterReanimation()}");
         sb.AppendLine($"  CountZombiesOnScreen = {BoardPatch.cachedBoard?.CountZombiesOnScreen()}");
         Core.gLogger.Msg(sb.ToString());
     }
@@ -82,7 +81,6 @@ internal class BoardPatch
         Core.gLogger.Msg($"Board#{__instance?.GetHashCode()}.InitLevel()");
 
         PrintBoardStaticInfo();
-        PrintBoardDynamicInfo();
     }
 
     [HarmonyPatch("StartLevel")]
@@ -90,6 +88,8 @@ internal class BoardPatch
     static void StartLevel()
     {
         Core.gLogger.Msg($"Board.StartLevel()");
+
+        PrintBoardDynamicInfo();
     }
 
     // Plant AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
