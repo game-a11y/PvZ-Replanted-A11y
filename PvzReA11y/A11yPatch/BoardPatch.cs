@@ -107,12 +107,30 @@ internal class BoardPatch
         Core.gLogger.Msg($"Board.AddCoin(X={theX}, Y={theY}, CoinType={theCoinType}, CoinMotion={theCoinMotion})");
     }
 
-    // 普通的僵尸按波次放置
+
+    #region 僵尸生成
     [HarmonyPatch("AddZombie")]
     [HarmonyPostfix]
     static void AddZombie(ZombieType theZombieType, int theFromWave, bool shakeBrush)
     {
-        Core.gLogger.Msg($"Board.AddZombie(ZombieType={theZombieType}, FromWave={theFromWave}, shakeBrush={shakeBrush})");
+        //Core.gLogger.Msg($"Board.AddZombie(ZombieType={theZombieType}, FromWave={theFromWave}, shakeBrush={shakeBrush})");
+    }
+
+    /// <summary>
+    /// 会调用 AddZombie
+    /// </summary>
+    /// <remarks>
+    /// 普通的僵尸按波次放置
+    /// </remarks>
+    /// <param name="theZombieType">僵尸类型</param>
+    /// <param name="theRow">行号</param>
+    /// <param name="theFromWave">波次号</param>
+    /// <param name="shakeBrush">?</param>
+    [HarmonyPatch("AddZombieInRow")]
+    [HarmonyPostfix]
+    static void AddZombieInRow(ZombieType theZombieType, int theRow, int theFromWave, bool shakeBrush)
+    {
+        Core.gLogger.Msg($"Board.AddZombieInRow(ZombieType={theZombieType}, Row={theRow}, FromWave={theFromWave}, shakeBrush={shakeBrush})");
     }
 
     [HarmonyPatch("AddZombieAtCell")]
@@ -121,6 +139,8 @@ internal class BoardPatch
     {
         Core.gLogger.Msg($"Board.AddZombieAtCell(ZombieType={theZombieType}, x={x}, y={y})");
     }
+    #endregion 僵尸生成
+
 
     [HarmonyPatch("Update")]
     [HarmonyPostfix]
@@ -137,12 +157,28 @@ internal class BoardPatch
     //    Core.gLogger.Msg($"Board.Pause(thePause)");
     //}
 
+    #region 僵尸波次
     [HarmonyPatch("NextWaveComing")]
     [HarmonyPostfix]
     static void NextWaveComing()
     {
         Core.gLogger.Msg($"Board.NextWaveComing()");
     }
+
+    [HarmonyPatch("SpawnZombieWave")]
+    [HarmonyPostfix]
+    static void SpawnZombieWave()
+    {
+        Core.gLogger.Msg($"Board.SpawnZombieWave()");
+    }
+
+    [HarmonyPatch("SpawnZombiesFromGraves")]
+    [HarmonyPostfix]
+    static void SpawnZombiesFromGraves()
+    {
+        Core.gLogger.Msg($"Board.SpawnZombiesFromGraves()");
+    }
+    #endregion 僵尸波次
 
     //[HarmonyPatch("LoadGame")]
     //[HarmonyPostfix]
