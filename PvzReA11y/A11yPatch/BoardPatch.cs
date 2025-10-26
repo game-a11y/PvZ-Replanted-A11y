@@ -95,12 +95,65 @@ internal class BoardPatch
         PrintBoardDynamicInfo();
     }
 
+
+    #region 植物函数
+    /// <summary>
+    /// 添加植物
+    /// </summary>
+    /// <param name="theGridX">网格坐标 X</param>
+    /// <param name="theGridY">网格坐标 Y</param>
+    /// <param name="theSeedType">种子类型</param>
+    /// <param name="theImitaterType">模仿者类型</param>
     [HarmonyPatch("AddPlant")]
     [HarmonyPostfix]
     static void AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
     {
         Core.gLogger.Msg($"Board.AddPlant(X={theGridX}, Y={theGridY}, SeedType={theSeedType}, ImitaterType={theImitaterType})");
     }
+
+    /// <summary>
+    /// 移除所有植物
+    /// </summary>
+    [HarmonyPatch("RemoveAllPlants")]
+    [HarmonyPostfix]
+    static void RemoveAllPlants()
+    {
+        Core.gLogger.Msg($"Board.RemoveAllPlants()");
+    }
+
+    /// <summary>
+    /// 移除半径内的所有植物
+    /// </summary>
+    /// <param name="theX">中心坐标 X</param>
+    /// <param name="theY">中心坐标 Y</param>
+    /// <param name="theRadius">半径</param>
+    [HarmonyPatch("KillAllPlantsInRadius", new Type[] { typeof(int), typeof(int), typeof(int) })]
+    [HarmonyPostfix]
+    static void KillAllPlantsInRadius_Int(int theX, int theY, int theRadius)
+    {
+        Core.gLogger.Msg($"Board.KillAllPlantsInRadius(int X={theX}, Y={theY}, Radius={theRadius})");
+    }
+
+    [HarmonyPatch("KillAllPlantsInRadius", new Type[] { typeof(float), typeof(float), typeof(int) })]
+    [HarmonyPostfix]
+    static void KillAllPlantsInRadius_Float(float theX, float theY, int theRadius)
+    {
+        Core.gLogger.Msg($"Board.KillAllPlantsInRadius(float X={theX}, Y={theY}, Radius={theRadius})");
+    }
+
+    /// <summary>
+    /// 清除植物周围的雾气
+    /// </summary>
+    /// <param name="thePlant"></param>
+    /// <param name="theSize"></param>
+    [HarmonyPatch("ClearFogAroundPlant")]
+    [HarmonyPostfix]
+    static void ClearFogAroundPlant(Plant thePlant, int theSize)
+    {
+        Core.gLogger.Msg($"Board.ClearFogAroundPlant(Plant=Plant#{thePlant?.GetHashCode()}, Size={theSize})");
+    }
+    #endregion 植物函数
+
 
     // 包含阳光的下落
     [HarmonyPatch("AddCoin")]
