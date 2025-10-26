@@ -2,7 +2,7 @@
 using PvzReA11y.A11yPatch;
 
 [assembly: MelonInfo(typeof(PvzReA11y.Core),
-    "PvzReA11y", "1.0.0", "inkydragon",
+    "A11y Mod", "1.0.0", "inkydragon",
     "https://github.com/game-a11y/PvZ-Replanted-A11y")]
 [assembly: MelonGame("PopCap Games", "PvZ Replanted")]
 

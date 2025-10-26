@@ -6,10 +6,7 @@
 		<RootNamespace>PvzReA11y</RootNamespace>
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
-		<NeutralLanguage>en-US</NeutralLanguage>
-		<AssemblyName>PvzReA11y</AssemblyName>
+		<AssemblyName>A11yMod</AssemblyName>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
@@ -459,6 +456,12 @@
 	<PropertyGroup>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<Authors>inkydragon, game-a11y</Authors>
+		<Company>Game-A11y</Company>
+		<Copyright>All Rights Reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/game-a11y/PvZ-Replanted-A11y</PackageProjectUrl>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
