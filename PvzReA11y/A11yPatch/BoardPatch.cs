@@ -10,6 +10,7 @@ internal class BoardPatch
     static Il2CppReloaded.Gameplay.Board cachedBoard;
     static bool isBoardInitialized = false;
 
+    #region 辅助函数
     /// <summary>
     /// 打印 Board 的静态信息
     /// </summary>
@@ -67,6 +68,8 @@ internal class BoardPatch
         sb.AppendLine($"  CountZombiesOnScreen = {BoardPatch.cachedBoard?.CountZombiesOnScreen()}");
         Core.gLogger.Msg(sb.ToString());
     }
+    #endregion 辅助函数
+
 
     [HarmonyPatch("InitLevel")]
     [HarmonyPostfix]
