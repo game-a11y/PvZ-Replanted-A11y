@@ -13,6 +13,36 @@ namespace PvzReA11y.A11yPatch;
 internal class SelectablePatch
 {
     /// <summary>
+    /// Hook Selectable.OnSelect 方法
+    /// 在手柄焦点进入可选择元素时触发
+    /// </summary>
+    /// <param name="__instance">Selectable 实例</param>
+    /// <param name="eventData">事件数据</param>
+    [HarmonyPatch("OnSelect")]
+    [HarmonyPostfix]
+    static void OnSelect_Postfix(Selectable __instance, BaseEventData eventData)
+    {
+        if (__instance == null) return;
+
+        // 获取基本信息
+        string objectName = __instance.gameObject.name ?? "Unknown";
+        string objectType = __instance.GetType().Name;
+        string objectText = GetSelectableText(__instance);
+        string objParent = "";
+        if (__instance.transform != null && __instance.transform.parent != null)
+        {
+            objParent = __instance.transform.parent.name;
+        }
+
+        // 语音播报
+        string a11yText = objectText;
+        if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
+        string a11tCtx = $"{objParent} > {objectName}: {objectType}";
+        a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
+        A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+    }
+
+    /// <summary>
     /// Hook Selectable.OnPointerEnter 方法
     /// 在鼠标进入可选择元素时触发
     /// </summary>  
