@@ -471,6 +471,7 @@
 		<Compile Include="A11yPatch\GridNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
+		<Compile Include="A11yPatch\ListNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
 		<Compile Include="A11y\SR.cs" />
