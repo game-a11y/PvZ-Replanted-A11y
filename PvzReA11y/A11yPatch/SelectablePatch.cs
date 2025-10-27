@@ -54,40 +54,21 @@ internal class SelectablePatch
     {
         if (__instance == null) return;
 
-        try
+    
+        // 获取基本信息
+        string objectName = __instance.gameObject.name ?? "Unknown";
+        string objectType = __instance.GetType().Name;
+        string objParent = "";
+        if (__instance.transform != null && __instance.transform.parent != null)
         {
-            // 获取基本信息
-            string objectName = __instance.gameObject.name ?? "Unknown";
-            string objectType = __instance.GetType().Name;
-            string objectText = "";
-            
-            // 尝试获取文本内容
-            objectText = GetSelectableText(__instance);
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Selectable.OnPointerEnter");
-            sb.AppendLine($"{objectName}: {objectType}, Text: '{objectText}'");
-            sb.Append("  ");
-            string objParent = "";
-            if (__instance.transform != null && __instance.transform.parent != null)
-            {
-                objParent = __instance.transform.parent.name;
-                // 输出父对象信息
-                sb.Append($"Parent: {objParent}");
-                sb.Append(", ");
-            }
-            sb.Append($"Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}");
-            Core.gLogger.Msg(sb);
-
-            string a11yText = objectText;
-            if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
-            string a11tCtx = $"{objParent} > {objectName}: {objectType}";
-            A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+            objParent = __instance.transform.parent.name;
         }
-        catch (Exception ex)
-        {
-            Core.gLogger.Error($"SelectablePatch.OnPointerEnter error: {ex.Message}");
-        }
+
+        string a11yText = GetSelectableText(__instance);
+        if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
+        string a11tCtx = $"{objParent} > {objectName}: {objectType}";
+        a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
+        A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
     }
     
     /// <summary>
