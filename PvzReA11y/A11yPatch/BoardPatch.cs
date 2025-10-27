@@ -70,7 +70,7 @@ internal class BoardPatch
     }
     #endregion 辅助函数
 
-
+    // TODO: 收集当前关卡包含的僵尸类型（FromWave=-2）
     [HarmonyPatch("InitLevel")]
     [HarmonyPostfix]
     static void InitLevel(Il2CppReloaded.Gameplay.Board __instance)

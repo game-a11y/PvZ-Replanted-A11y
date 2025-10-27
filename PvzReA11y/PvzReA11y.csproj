@@ -468,6 +468,7 @@
 		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\EventSystemPatch.cs" />
 		<Compile Include="A11yPatch\GameButtonPatch.cs" />
+		<Compile Include="A11yPatch\GridNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
