@@ -21,10 +21,10 @@ internal class SelectablePatch
     [HarmonyPostfix]
     static void OnPointerEnter_Postfix(Selectable __instance, PointerEventData eventData)
     {
+        if (__instance == null) return;
+
         try
         {
-            if (__instance == null) return;
-            
             // 获取基本信息
             string objectName = __instance.gameObject.name ?? "Unknown";
             string objectType = __instance.GetType().Name;
@@ -39,17 +39,10 @@ internal class SelectablePatch
             // 输出状态信息
             Core.gLogger.Msg($"  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}");
             
-            // 输出位置信息
-            if (__instance.transform != null)
+            if (__instance.transform != null && __instance.transform.parent != null)
             {
-                var worldPos = __instance.transform.position;
-                Core.gLogger.Msg($"  Position: {worldPos}");
-                
                 // 输出父对象信息
-                if (__instance.transform.parent != null)
-                {
-                    Core.gLogger.Msg($"  Parent: {__instance.transform.parent.name}");
-                }
+                Core.gLogger.Msg($"  Parent: {__instance.transform.parent.name}");
             }
         }
         catch (Exception ex)
