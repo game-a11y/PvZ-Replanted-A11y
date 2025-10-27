@@ -20,19 +20,19 @@ internal class EventSystemPatch
     /// </summary>
     /// <param name="__instance">EventSystem 实例</param>
     /// <param name="selected">被选中的游戏对象</param>
-    [HarmonyPatch("SetSelectedGameObject", typeof(GameObject))]
-    [HarmonyPostfix]
-    static void SetSelectedGameObject_Postfix(GameObject selected)
-    {
-        // 避免重复触发
-        if (_lastSelectedObject == selected) return;
+    // [HarmonyPatch("SetSelectedGameObject", typeof(GameObject))]
+    // [HarmonyPostfix]
+    // static void SetSelectedGameObject_Postfix(GameObject selected)
+    // {
+    //     // 避免重复触发
+    //     if (_lastSelectedObject == selected) return;
 
-        string lastObjectName = _lastSelectedObject?.name ?? "None";
-        string curObjectName = selected?.name ?? "None";
+    //     string lastObjectName = _lastSelectedObject?.name ?? "None";
+    //     string curObjectName = selected?.name ?? "None";
 
-        Core.gLogger.Msg($"EventSystem.SetSelectedGameObject: {lastObjectName} -> {curObjectName}");
-        _lastSelectedObject = selected;
-    }
+    //     Core.gLogger.Msg($"EventSystem.SetSelectedGameObject: {lastObjectName} -> {curObjectName}");
+    //     _lastSelectedObject = selected;
+    // }
 
     // TODO: 对局中会报空指针错误
     /// <summary>
