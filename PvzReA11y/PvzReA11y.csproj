@@ -470,7 +470,6 @@
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
-		<Compile Include="A11yPatch\SelectableBinderPatch.cs" />
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Utils.cs" />
