@@ -197,7 +197,7 @@ public static class SR
         {
             //                                               "INTERRUPT"
             string interruptText = interrupt ? "INTERRUPT" : "  QUEUE++";
-            MelonLogger.Msg($"Tolk.Speak({interruptText}): {text}");
+            MelonLogger.Warning($"Tolk.Speak({interruptText}): \"{text}\"");
             MelonLogger.Msg($"\tContext: {context}");
         }
 

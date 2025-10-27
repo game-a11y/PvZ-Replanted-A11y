@@ -1,6 +1,7 @@
 using HarmonyLib;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Text;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -32,18 +33,26 @@ internal class SelectablePatch
             
             // 尝试获取文本内容
             objectText = GetSelectableText(__instance);
-            
-            // 输出悬停信息
-            Core.gLogger.Msg($"Selectable.OnPointerEnter - Type: {objectType}, Name: '{objectName}', Text: '{objectText}'");
-            
-            // 输出状态信息
-            Core.gLogger.Msg($"  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}");
-            
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Selectable.OnPointerEnter");
+            sb.AppendLine($"{objectName}: {objectType}, Text: '{objectText}'");
+            sb.Append("  ");
+            string objParent = "";
             if (__instance.transform != null && __instance.transform.parent != null)
             {
+                objParent = __instance.transform.parent.name;
                 // 输出父对象信息
-                Core.gLogger.Msg($"  Parent: {__instance.transform.parent.name}");
+                sb.Append($"Parent: {objParent}");
+                sb.Append(", ");
             }
+            sb.Append($"Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}");
+            Core.gLogger.Msg(sb);
+
+            string a11yText = objectText;
+            if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
+            string a11tCtx = $"{objParent} > {objectName}: {objectType}";
+            A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
         }
         catch (Exception ex)
         {
