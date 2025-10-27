@@ -1,6 +1,9 @@
 ﻿
 namespace PvzReA11y.A11y;
 
+/// <summary>
+/// Mock class for Tolk.
+/// </summary>
 internal class TolkMock
 {
     // Prevent construction

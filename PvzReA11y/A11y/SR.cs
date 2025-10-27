@@ -102,7 +102,7 @@ public static class SR
             }
             else
             {
-                MelonLogger.Msg("Tolk: No supported screen reader detected, but Tolk is still available");
+                MelonLogger.Warning("Tolk: No supported screen reader detected, but Tolk is still available");
                 _isInitialized = true; // 即使没有检测到屏幕阅读器，Tolk 仍然可用
             }
 
@@ -111,7 +111,7 @@ public static class SR
         }
         catch (Exception ex)
         {
-            MelonLogger.Msg($"Tolk: Initialization failed:", ex);
+            MelonLogger.Error($"Tolk: Initialization failed:", ex);
             _isInitialized = false;
             return false;
         }
@@ -137,7 +137,7 @@ public static class SR
         }
         catch (Exception ex)
         {
-            MelonLogger.Msg($"Tolk: Shutdown failed:", ex);
+            MelonLogger.Error($"Tolk: Shutdown failed:", ex);
         }
     }
 
@@ -157,17 +157,17 @@ public static class SR
         {
             if (_verboseLogging)
             {
-                MelonLogger.Msg($"Tolk: Speech disabled, skipping: {text}");
+                MelonLogger.Warning($"Tolk: Speech disabled, skipping: {text}");
             }
             return;
         }
 
         if (!_isInitialized)
         {
-            MelonLogger.Msg("Tolk: Not initialized, attempting to initialize...");
+            MelonLogger.Warning("Tolk: Not initialized, attempting to initialize...");
             if (!Initialize())
             {
-                MelonLogger.Msg("Tolk: Failed to initialize, cannot speak");
+                MelonLogger.Error("Tolk: Failed to initialize, cannot speak");
                 return;
             }
         }
@@ -208,7 +208,7 @@ public static class SR
         }
         catch (Exception ex)
         {
-            MelonLogger.Msg($"Tolk.Speak failed", ex);
+            MelonLogger.Error($"Tolk.Speak failed", ex);
         }
     }
 
