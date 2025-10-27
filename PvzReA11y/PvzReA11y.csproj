@@ -467,6 +467,8 @@
 	<ItemGroup>
 		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\GameButtonPatch.cs" />
+		<Compile Include="A11yPatch\HoverDetectorComponent.cs" />
+		<Compile Include="A11yPatch\HoverDetectorManager.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
