@@ -475,6 +475,7 @@
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
 		<Compile Include="A11yPatch\ListNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
+		<Compile Include="A11yPatch\PauseTogglerPatch.cs" />
 		<Compile Include="A11yPatch\SeedChooserScreenPatch.cs" />
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
 		<Compile Include="A11yPatch\WidgetManagerPatch.cs" />
