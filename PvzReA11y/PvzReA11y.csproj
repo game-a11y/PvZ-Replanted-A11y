@@ -471,6 +471,8 @@
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
 		<Compile Include="A11yPatch\MainMenuPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
+		<Compile Include="A11y\SR.cs" />
+		<Compile Include="A11y\TolkMock.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Utils.cs" />
 	</ItemGroup>

@@ -28,6 +28,11 @@ public class Core : MelonMod
         gLogger = LoggerInstance;
         gHarmony = HarmonyInstance;
 
+        A11y.SR.Initialize();
+        // 打印所有输出
+        A11y.SR.VerboseLogging = true;
+        A11y.SR.TestSpeech();
+
         // NOTE: 此处无需手动注册，MelonLoader 会自动应用带有 [HarmonyPatch] 特性的补丁
         //gHarmony.PatchAll();
         LoggerInstance.Msg("Mod Initialized");
