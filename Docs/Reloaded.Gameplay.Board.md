@@ -1,3 +1,14 @@
+```cs
+		// Token: 0x0400134B RID: 4939
+		[Token(Token = "0x400134B")]
+		[FieldOffset(Offset = "0xF0")]
+		public GameButton mMenuButton;
+
+		// Token: 0x0400134C RID: 4940
+		[Token(Token = "0x400134C")]
+		[FieldOffset(Offset = "0xF8")]
+		public GameButton mStoreButton;
+```
 
 ## 植物相关函数
 
