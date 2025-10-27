@@ -11,7 +11,7 @@ namespace PvzReA11y.A11yPatch;
 public class DialogPatch
 {
     /// <summary>
-    /// Hook Dialog.Show 方法，在对话框显示后提供额外信息
+    /// Dialog.Show 方法，在对话框显示后提供额外信息 (弹窗提示框)
     /// </summary>
     /// <param name="__instance">Dialog实例</param>
     /// <param name="isZenGarden">是否为禅境花园模式</param>
@@ -23,10 +23,10 @@ public class DialogPatch
 
         Core.gLogger.Msg($"Dialog.Show(isZenGarden={isZenGarden})");
         StringBuilder sb = new StringBuilder();
-        sb.Append($"  Type: {__instance.mDialogType}");
-        sb.Append($"  Header: {__instance.mDialogHeader}");
-        sb.Append($"  Lines:  {__instance.mDialogLines}");
-        sb.Append($"  Footer: {__instance.mDialogFooter}");
+        sb.Append($" Type: {__instance.mDialogType},");
+        sb.Append($" Header: {__instance.mDialogHeader},");
+        sb.Append($" Lines:  {__instance.mDialogLines},");
+        sb.Append($" Footer: '{__instance.mDialogFooter}',");
         Core.gLogger.Msg(sb.ToString());
     }
 }
