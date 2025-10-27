@@ -1,7 +1,4 @@
-﻿using Il2CppInterop.Runtime.Injection;
-using MelonLoader;
-using PvzReA11y.A11yPatch;
-using UnityEngine.EventSystems;
+﻿using MelonLoader;
 
 [assembly: MelonInfo(typeof(PvzReA11y.Core),
     "A11y Mod", "1.0.0", "inkydragon",
@@ -31,12 +28,6 @@ public class Core : MelonMod
         gLogger = LoggerInstance;
         gHarmony = HarmonyInstance;
 
-        // // [HoverDetectorManager] 注册新的 il2cpp 类型
-        // ClassInjector.RegisterTypeInIl2Cpp<HoverDetectorComponent>(new RegisterTypeOptions()
-        // {
-        //     Interfaces = new [] { typeof(IPointerEnterHandler) },
-        // });
-
         // NOTE: 此处无需手动注册，MelonLoader 会自动应用带有 [HarmonyPatch] 特性的补丁
         //gHarmony.PatchAll();
         LoggerInstance.Msg("Mod Initialized");
@@ -51,9 +42,6 @@ public class Core : MelonMod
     public override void OnLateInitializeMelon()
     {
         LoggerInstance.Msg("OnLateInitializeMelon: After Mod init");
-        
-        // 初始化悬停检测管理器
-        // HoverDetectorManager.Initialize();
     }
 
     /// <summary>
@@ -106,11 +94,6 @@ public class Core : MelonMod
     public override void OnUpdate()
     {
         // LoggerInstance.Msg("OnUpdate");
-
-        // // 更新悬停检测管理器
-        // HoverDetectorManager.Update();
-        // // 定期清理已销毁的对象
-        // HoverDetectorManager.CleanupDestroyedObjects();
     }
 
     /// <summary>
