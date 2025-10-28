@@ -465,6 +465,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="A11yPatch\AchievementToastManagerPatch.cs" />
 		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\ConfirmPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\DialogPatch.cs" />
