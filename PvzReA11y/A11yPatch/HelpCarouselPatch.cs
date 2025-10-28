@@ -30,9 +30,13 @@ public class HelpCarouselPatch
 
     [HarmonyPatch("SetPageLabel")]
     [HarmonyPostfix]
-    public static void SetPageLabel_Postfix()
+    public static void SetPageLabel_Postfix(HelpCarousel __instance)
     {
+        if (__instance == null) return;
+
         Core.gLogger.Msg($"HelpCarousel.SetPageLabel()");
+        string pageLabel = __instance.m_pageLabel != null ? __instance.m_pageLabel.text : "";
+        Core.gLogger.Msg($"  currentScreen={__instance.m_currentScreen}; pageLabel={pageLabel}");
     }
 
     [HarmonyPatch("SetPage")]
