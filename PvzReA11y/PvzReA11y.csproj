@@ -469,6 +469,7 @@
 		<Compile Include="A11yPatch\DialogPatch.cs" />
 		<Compile Include="A11yPatch\EventSystemPatch.cs" />
 		<Compile Include="A11yPatch\GameButtonPatch.cs" />
+		<Compile Include="A11yPatch\GameplayActivityPatch.cs" />
 		<Compile Include="A11yPatch\GridNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\ImitaterDialogPatch.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
