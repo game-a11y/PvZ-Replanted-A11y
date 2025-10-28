@@ -26,11 +26,11 @@ internal class SelectablePatch
         bool interactable = obj.interactable;
         bool isActive = obj.IsActive();
 
+        // 非交互元素，跳过
+        if (!interactable) return true;
+
         if (string.IsNullOrEmpty(objectText))
         {
-            // 非交互元素且无文本，跳过
-            if (!interactable) return true;
-
             // 【帮助】菜单，左右移动箭头黑色背景
             if ("Center" == objParent && "Arrows" == objectName) return true;
         }
