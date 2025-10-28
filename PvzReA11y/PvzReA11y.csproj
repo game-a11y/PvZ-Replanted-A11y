@@ -468,6 +468,7 @@
 		<Compile Include="A11yPatch\AchievementToastManagerPatch.cs" />
 		<Compile Include="A11yPatch\AlmanacArchivePatch.cs" />
 		<Compile Include="A11yPatch\BackgroundControllerPatch.cs" />
+		<Compile Include="A11yPatch\CardboardControllerPatch.cs" />
 		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\ConfirmPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\CrazyDaveStoreInitializerPatch.cs" />
