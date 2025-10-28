@@ -1,6 +1,5 @@
 using HarmonyLib;
 using Il2CppUI.Scripts;
-using UnityEngine;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -11,7 +10,9 @@ public class HelpCarouselPatch
     [HarmonyPostfix]
     public static void OnEnable_Postfix()
     {
-        Core.gLogger.Msg($"HelpCarousel.OnEnable()");
+        string a11yText = $"已打开帮助页面";
+        string a11yCtx = "HelpCarousel.OnEnable()";
+        A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
     }
 
     [HarmonyPatch("NextScreen")]
@@ -33,10 +34,42 @@ public class HelpCarouselPatch
     public static void SetPageLabel_Postfix(HelpCarousel __instance)
     {
         if (__instance == null) return;
+        string a11yCtx = "HelpCarousel.SetPageLabel()";
 
-        Core.gLogger.Msg($"HelpCarousel.SetPageLabel()");
+        int currentScreen = __instance.m_currentScreen;
         string pageLabel = __instance.m_pageLabel != null ? __instance.m_pageLabel.text : "";
-        Core.gLogger.Msg($"  currentScreen={__instance.m_currentScreen}; pageLabel={pageLabel}");
+        string pageNumStr = $"页面 {pageLabel}";
+        if (string.IsNullOrEmpty(pageLabel))
+        {
+            pageNumStr = $"第 {currentScreen + 1} 页";
+        }
+        a11yCtx += $";  currentScreen={currentScreen}";
+
+        // TODO: 拆分帮助文本显示
+        string a11yText = "";
+        switch (currentScreen)
+        {
+            case 0:
+                a11yText = $"帮助 ({pageNumStr})";
+                break;
+            case 1:
+                a11yText = $"实用帮助 ({pageNumStr})";
+                break;
+            case 2:
+                a11yText = $"合作模式 ({pageNumStr})";
+                break;
+            case 3:
+                a11yText = $"对战模式 ({pageNumStr})";
+                break;
+            case 4:
+                a11yText = $"冒险安息 ({pageNumStr})";
+                break;
+            default:
+                Core.gLogger.Warning($"HelpCarousel.SetPageLabel(): Unknown page num: {currentScreen}");
+                break;
+        }
+
+        A11y.SR.SpeakQueue(a11yText, a11yCtx);
     }
 
     [HarmonyPatch("SetPage")]

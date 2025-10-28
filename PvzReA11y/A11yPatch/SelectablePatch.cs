@@ -1,7 +1,7 @@
 using HarmonyLib;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Text;
+using UnityEngine.UI;
+using static MelonLoader.MelonLogger;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -12,6 +12,32 @@ namespace PvzReA11y.A11yPatch;
 [HarmonyPatch(typeof(Selectable))]
 internal class SelectablePatch
 {
+    public static bool NeedSkipA11yOutput(Selectable obj)
+    {
+        // 获取基本信息
+        string objectName = obj.gameObject.name ?? "Unknown";
+        string objectType = obj.GetType().Name;
+        string objectText = GetSelectableText(obj);
+        string objParent = "";
+        if (obj.transform != null && obj.transform.parent != null)
+        {
+            objParent = obj.transform.parent.name;
+        }
+        bool interactable = obj.interactable;
+        bool isActive = obj.IsActive();
+
+        if (string.IsNullOrEmpty(objectText))
+        {
+            // 非交互元素且无文本，跳过
+            if (!interactable) return true;
+
+            // 【帮助】菜单，左右移动箭头黑色背景
+            if ("Center" == objParent && "Arrows" == objectName) return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Hook Selectable.OnSelect 方法
     /// 在手柄焦点进入可选择元素时触发
@@ -39,7 +65,15 @@ internal class SelectablePatch
         if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
         string a11tCtx = $"{objParent} > {objectName}: {objectType}";
         a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
-        A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+        if (NeedSkipA11yOutput(__instance))
+        {
+            Core.gLogger.Msg($"Selectable.OnSelect(): '{a11yText}'");
+            Core.gLogger.Msg($"    {a11tCtx}");
+        }
+        else
+        {
+            A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+        }
     }
 
     /// <summary>
@@ -54,7 +88,6 @@ internal class SelectablePatch
     {
         if (__instance == null) return;
 
-    
         // 获取基本信息
         string objectName = __instance.gameObject.name ?? "Unknown";
         string objectType = __instance.GetType().Name;
@@ -68,7 +101,15 @@ internal class SelectablePatch
         if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
         string a11tCtx = $"{objParent} > {objectName}: {objectType}";
         a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
-        A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+        if (NeedSkipA11yOutput(__instance))
+        {
+            Core.gLogger.Msg($"Selectable.OnPointerEnter(): '{a11yText}'");
+            Core.gLogger.Msg($"    {a11tCtx}");
+        }
+        else
+        {
+            A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
+        }
     }
     
     /// <summary>
