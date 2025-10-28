@@ -475,6 +475,7 @@
 		<Compile Include="A11yPatch\GameplayActivityPatch.cs" />
 		<Compile Include="A11yPatch\GameplayOptionsMenuPatch.cs" />
 		<Compile Include="A11yPatch\GridNavigationContainerPatch.cs" />
+		<Compile Include="A11yPatch\HelpCarouselPatch.cs" />
 		<Compile Include="A11yPatch\ImitaterDialogPatch.cs" />
 		<Compile Include="A11yPatch\InputNavigationContainerPatch.cs" />
 		<Compile Include="A11yPatch\LevelSelectScreenPatch.cs" />
