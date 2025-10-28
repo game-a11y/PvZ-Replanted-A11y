@@ -1,6 +1,7 @@
 # PvZ Replanted A11y
 
-An accessibility mod for Plants vs. Zombies™: Replanted
+An accessibility mod for
+[Plants vs. Zombies™: Replanted (Steam Version)](https://store.steampowered.com/app/3654560/_/)
 
 ## Dependencies
 
