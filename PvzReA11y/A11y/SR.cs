@@ -78,13 +78,13 @@ public static class SR
     {
         if (_isInitialized)
         {
-            MelonLogger.Msg("Tolk: Already initialized, skipping...");
+            Core.gLogger.Msg("Tolk: Already initialized, skipping...");
             return true;
         }
 
         try
         {
-            MelonLogger.Msg("Tolk: Initializing...");
+            Core.gLogger.Msg("Tolk: Initializing...");
 
             // 加载 Tolk 库
             TolkMock.Load();
@@ -97,21 +97,21 @@ public static class SR
 
             if (!string.IsNullOrEmpty(_detectedScreenReader))
             {
-                MelonLogger.Msg($"Tolk: Successfully detected screen reader: {_detectedScreenReader}");
+                Core.gLogger.Msg($"Tolk: Successfully detected screen reader: {_detectedScreenReader}");
                 _isInitialized = true;
             }
             else
             {
-                MelonLogger.Warning("Tolk: No supported screen reader detected, but Tolk is still available");
+                Core.gLogger.Warning("Tolk: No supported screen reader detected, but Tolk is still available");
                 _isInitialized = true; // 即使没有检测到屏幕阅读器，Tolk 仍然可用
             }
 
-            MelonLogger.Msg("Tolk: Initialization completed successfully");
+            Core.gLogger.Msg("Tolk: Initialization completed successfully");
             return true;
         }
         catch (Exception ex)
         {
-            MelonLogger.Error($"Tolk: Initialization failed:", ex);
+            Core.gLogger.Error($"Tolk: Initialization failed:", ex);
             _isInitialized = false;
             return false;
         }
@@ -129,15 +129,15 @@ public static class SR
 
         try
         {
-            MelonLogger.Msg("Tolk: Shutting down...");
+            Core.gLogger.Msg("Tolk: Shutting down...");
             TolkMock.Unload();
             _isInitialized = false;
             _detectedScreenReader = null;
-            MelonLogger.Msg("Tolk: Shutdown completed");
+            Core.gLogger.Msg("Tolk: Shutdown completed");
         }
         catch (Exception ex)
         {
-            MelonLogger.Error($"Tolk: Shutdown failed:", ex);
+            Core.gLogger.Error($"Tolk: Shutdown failed:", ex);
         }
     }
 
@@ -157,17 +157,17 @@ public static class SR
         {
             if (_verboseLogging)
             {
-                MelonLogger.Warning($"Tolk: Speech disabled, skipping: {text}");
+                Core.gLogger.Warning($"Tolk: Speech disabled, skipping: {text}");
             }
             return;
         }
 
         if (!_isInitialized)
         {
-            MelonLogger.Warning("Tolk: Not initialized, attempting to initialize...");
+            Core.gLogger.Warning("Tolk: Not initialized, attempting to initialize...");
             if (!Initialize())
             {
-                MelonLogger.Error("Tolk: Failed to initialize, cannot speak");
+                Core.gLogger.Error("Tolk: Failed to initialize, cannot speak");
                 return;
             }
         }
@@ -197,8 +197,8 @@ public static class SR
         {
             //                                               "INTERRUPT"
             string interruptText = interrupt ? "INTERRUPT" : "  QUEUE++";
-            MelonLogger.Warning($"Tolk.Speak({interruptText}): \"{text}\"");
-            MelonLogger.Msg($"\tContext: {context}");
+            Core.gLogger.Warning($"Tolk.Speak({interruptText}): \"{text}\"");
+            Core.gLogger.Msg($"\tContext: {context}");
         }
 
         try
@@ -208,7 +208,7 @@ public static class SR
         }
         catch (Exception ex)
         {
-            MelonLogger.Error($"Tolk.Speak failed", ex);
+            Core.gLogger.Error($"Tolk.Speak failed", ex);
         }
     }
 
@@ -238,7 +238,7 @@ public static class SR
     public static void StopSpeech(string context = "")
     {
         SpeakInterrupt(text: "", context); // 发送空字符串并打断来停止语音
-        MelonLogger.Msg("StopSpeech()");
+        Core.gLogger.Msg("StopSpeech()");
     }
 
     #endregion
@@ -279,7 +279,7 @@ public static class SR
     /// </summary>
     public static void TestSpeech()
     {
-        MelonLogger.Msg("Tolk: Testing speech output...");
+        Core.gLogger.Msg("Tolk: Testing speech output...");
         Speak("Tolk speech test successful", "TestSpeech", true);
     }
     #endregion

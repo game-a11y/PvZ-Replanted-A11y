@@ -12,6 +12,6 @@ public class ConfirmPanelViewPatch
     [HarmonyPatch(nameof(ConfirmPanelView.OnShow))]
     public static void OnShow_Postfix()
     {
-        MelonLogger.Msg($"ConfirmPanelView.OnShow called");
+        Core.gLogger.Msg($"ConfirmPanelView.OnShow called");
     }
 }

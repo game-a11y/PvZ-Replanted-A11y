@@ -12,6 +12,6 @@ public class GameplayOptionsMenuPatch
     [HarmonyPatch(nameof(GameplayOptionsMenu.OnEnable))]
     public static void OnEnable_Postfix()
     {
-        MelonLogger.Msg($"GameplayOptionsMenu.OnEnable called");
+        Core.gLogger.Msg($"GameplayOptionsMenu.OnEnable called");
     }
 }

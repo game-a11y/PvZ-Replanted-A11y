@@ -12,6 +12,6 @@ public class ExitGamePatch
     [HarmonyPatch(nameof(ExitGame.Start))]
     public static void Start_Postfix()
     {
-        MelonLogger.Msg($"ExitGame.Start called");
+        Core.gLogger.Msg($"ExitGame.Start called");
     }
 }

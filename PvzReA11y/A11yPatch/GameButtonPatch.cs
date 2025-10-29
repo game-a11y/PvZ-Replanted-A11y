@@ -21,7 +21,7 @@ public class GameButtonPatch
     //     if (__instance == null) return;
     //     if (theLabel == null) return;
 
-    //     MelonLogger.Msg($"GameButton.SetLabel(Label={theLabel})");
+    //     Core.gLogger.Msg($"GameButton.SetLabel(Label={theLabel})");
     // }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class GameButtonPatch
     //    // if (!__result) return;
 
     //    // TODO: 仅在首次悬停时输出
-    //    MelonLogger.Msg($"GameButton#{__instance?.GetHashCode()}.IsMouseOver()");
+    //    Core.gLogger.Msg($"GameButton#{__instance?.GetHashCode()}.IsMouseOver()");
     //}
 
 }
