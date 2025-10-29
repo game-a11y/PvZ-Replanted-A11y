@@ -12,6 +12,13 @@ public class ConfirmPanelViewPatch
     [HarmonyPatch(nameof(ConfirmPanelView.OnShow))]
     public static void OnShow_Postfix()
     {
-        Core.gLogger.Msg($"ConfirmPanelView.OnShow called");
+        Core.gLogger.Msg($"ConfirmPanelView.OnShow()");
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(ConfirmPanelView.OnEnable))]
+    public static void OnEnable()
+    {
+        Core.gLogger.Msg($"ConfirmPanelView.OnEnable()");
     }
 }
