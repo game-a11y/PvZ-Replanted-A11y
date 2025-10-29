@@ -1,7 +1,5 @@
 using HarmonyLib;
 using Il2CppReloaded;
-using MelonLoader;
-using PvzReA11y.A11y;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -12,6 +10,13 @@ public class ExitGamePatch
     [HarmonyPatch(nameof(ExitGame.Start))]
     public static void Start_Postfix()
     {
-        Core.gLogger.Msg($"ExitGame.Start called");
+        Core.gLogger.Msg($"ExitGame.Start()");
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(ExitGame.Exit))]
+    public static void Exit_Postfix(int exitCode)
+    {
+        Core.gLogger.Msg($"ExitGame.Exit(exitCode={exitCode})");
     }
 }
