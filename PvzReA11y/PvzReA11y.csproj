@@ -472,6 +472,7 @@
 		<Compile Include="A11yPatch\BoardPatch.cs" />
 		<Compile Include="A11yPatch\ConfirmPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\CrazyDaveStoreInitializerPatch.cs" />
+		<Compile Include="A11yPatch\CutScenePatch.cs" />
 		<Compile Include="A11yPatch\DialogPatch.cs" />
 		<Compile Include="A11yPatch\EventSystemPatch.cs" />
 		<Compile Include="A11yPatch\ExitGamePatch.cs" />
