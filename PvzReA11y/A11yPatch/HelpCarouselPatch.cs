@@ -46,6 +46,8 @@ public class HelpCarouselPatch
         a11yCtx += $";  currentScreen={currentScreen}";
 
         // TODO: 拆分帮助文本显示
+        // NOTE: 使用手柄时，pageNum=3 为“控制“页
+        // bool IsUsingController = InputManager.IsAnyPlayerUsingController();
         string a11yText = "";
         switch (currentScreen)
         {
@@ -62,6 +64,9 @@ public class HelpCarouselPatch
                 a11yText = $"对战模式 ({pageNumStr})";
                 break;
             case 4:
+                a11yText = $"冒险安息 ({pageNumStr})";
+                break;
+            case 5:
                 a11yText = $"冒险安息 ({pageNumStr})";
                 break;
             default:
