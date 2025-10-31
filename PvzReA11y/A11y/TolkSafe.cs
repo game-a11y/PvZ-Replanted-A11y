@@ -330,33 +330,4 @@ public static class TolkSafe
 
     #endregion
 
-    #region 诊断方法
-
-    /// <summary>
-    /// 获取 Tolk 状态信息
-    /// </summary>
-    /// <returns>包含状态信息的字符串</returns>
-    public static string GetStatusInfo()
-    {
-        var info = new System.Text.StringBuilder();
-        info.AppendLine("Tolk Status:");
-        info.AppendLine($"  DLL Available: {IsDllAvailable}");
-        
-        if (!IsDllAvailable)
-        {
-            info.AppendLine($"  Error: {DllCheckError}");
-        }
-        else
-        {
-            info.AppendLine($"  Is Loaded: {IsLoaded()}");
-            info.AppendLine($"  Screen Reader: {DetectScreenReader()}");
-            info.AppendLine($"  Has Speech: {HasSpeech()}");
-            info.AppendLine($"  Has Braille: {HasBraille()}");
-            info.AppendLine($"  Is Speaking: {IsSpeaking()}");
-        }
-
-        return info.ToString();
-    }
-
-    #endregion
 }

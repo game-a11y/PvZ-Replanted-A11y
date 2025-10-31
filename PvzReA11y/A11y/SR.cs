@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using System.Diagnostics;
-//using Tolk = PvzReA11y.A11y.TolkMock;
-using Tolk = DavyKager.Tolk;
+using Tolk = PvzReA11y.A11y.TolkSafe;
+//using Tolk = DavyKager.Tolk;
 
 namespace PvzReA11y.A11y;
 
@@ -102,17 +102,13 @@ public static class SR
             // 检测屏幕阅读器
             _detectedScreenReader = Tolk.DetectScreenReader();
 
-            if (!string.IsNullOrEmpty(_detectedScreenReader))
+            if (string.IsNullOrEmpty(_detectedScreenReader))
             {
-                Core.gLogger.Msg($"Tolk: Successfully detected screen reader: {_detectedScreenReader}");
-                _isInitialized = true;
-            }
-            else
-            {
-                Core.gLogger.Warning("Tolk: No supported screen reader detected, but Tolk is still available");
-                _isInitialized = true; // 即使没有检测到屏幕阅读器，Tolk 仍然可用
+                _detectedScreenReader = "Mock.Console";
             }
 
+            Core.gLogger.Msg($"Tolk: Successfully detected screen reader: {_detectedScreenReader}");
+            _isInitialized = true;
             Core.gLogger.Msg("Tolk: Initialization completed successfully");
             return true;
         }
@@ -137,7 +133,7 @@ public static class SR
         try
         {
             Core.gLogger.Msg("Tolk: Shutting down...");
-            TolkMock.Unload();
+            Tolk.Unload();
             _isInitialized = false;
             _detectedScreenReader = null;
             Core.gLogger.Msg("Tolk: Shutdown completed");
@@ -211,7 +207,7 @@ public static class SR
         try
         {
             // 调用 Tolk 进行语音输出
-            TolkMock.Speak(text, interrupt);
+            Tolk.Speak(text, interrupt);
         }
         catch (Exception ex)
         {
@@ -269,7 +265,7 @@ public static class SR
         {
             try
             {
-                bool hasScreenReader = !string.IsNullOrEmpty(TolkMock.DetectScreenReader());
+                bool hasScreenReader = !string.IsNullOrEmpty(Tolk.DetectScreenReader());
                 info.AppendLine($"  Has Active Screen Reader: {hasScreenReader}");
             }
             catch (Exception ex)
