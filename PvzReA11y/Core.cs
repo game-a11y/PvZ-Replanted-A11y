@@ -31,7 +31,8 @@ public class Core : MelonMod
         A11y.SR.Initialize();
         // 打印所有输出
         A11y.SR.VerboseLogging = true;
-        A11y.SR.TestSpeech();
+        //A11y.SR.TestSpeech();
+        A11y.SR.SpeakQueue("无障碍 MOD 初始化成功");
 
         // NOTE: 此处无需手动注册，MelonLoader 会自动应用带有 [HarmonyPatch] 特性的补丁
         //gHarmony.PatchAll();
