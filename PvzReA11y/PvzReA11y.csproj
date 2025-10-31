@@ -177,6 +177,9 @@
 		<Reference Include="Il2Cpp__Generated">
 			<HintPath>..\Libs\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
 		</Reference>
+		<Reference Include="TolkDotNet">
+		  <HintPath>..\PvzReA11yMod\UserLibs\TolkDotNet.dll</HintPath>
+		</Reference>
 		<Reference Include="Unity.Addressables">
 			<HintPath>..\Libs\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
 		</Reference>
@@ -495,6 +498,7 @@
 		<Compile Include="A11yPatch\Tekly\PanelViewPatch.cs" />
 		<Compile Include="A11yPatch\WidgetManagerPatch.cs" />
 		<Compile Include="A11y\SR.cs" />
+		<Compile Include="A11y\TolkSafe.cs" />
 		<Compile Include="A11y\TolkMock.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Utils.cs" />

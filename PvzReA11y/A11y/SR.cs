@@ -1,6 +1,7 @@
 ﻿using MelonLoader;
 using System.Diagnostics;
-using Tolk = PvzReA11y.A11y.TolkMock;
+//using Tolk = PvzReA11y.A11y.TolkMock;
+using Tolk = DavyKager.Tolk;
 
 namespace PvzReA11y.A11y;
 
@@ -87,13 +88,19 @@ public static class SR
             Core.gLogger.Msg("Tolk: Initializing...");
 
             // 加载 Tolk 库
-            TolkMock.Load();
+            Tolk.Load();
+
+            // 检查是否成功加载
+            if (!Tolk.IsLoaded())
+            {
+                Core.gLogger.Warning("Tolk: Failed to load, but DLL is available");
+            }
 
             // 尝试启用 SAPI
-            TolkMock.TrySAPI(true);
+            Tolk.TrySAPI(true);
 
             // 检测屏幕阅读器
-            _detectedScreenReader = TolkMock.DetectScreenReader();
+            _detectedScreenReader = Tolk.DetectScreenReader();
 
             if (!string.IsNullOrEmpty(_detectedScreenReader))
             {
