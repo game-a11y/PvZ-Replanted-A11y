@@ -96,8 +96,8 @@ public static class SR
                 Core.gLogger.Warning("Tolk: Failed to load, but DLL is available");
             }
 
-            // 尝试启用 SAPI
-            Tolk.TrySAPI(true);
+            // 不使用 SAPI，会导致卡顿
+            Tolk.TrySAPI(false);
 
             // 检测屏幕阅读器
             _detectedScreenReader = Tolk.DetectScreenReader();
