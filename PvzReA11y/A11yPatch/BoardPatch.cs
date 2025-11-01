@@ -195,7 +195,15 @@ internal class BoardPatch
         string a11yCtx = $"Board.AddZombieInRow():" +
             $" ZombieType={theZombieType}, Row={theRow}, Wave={theFromWave}, shakeBrush={shakeBrush})";
 
-        A11y.SR.Speak(a11yText, a11yCtx);
+        // 僵尸种类预览
+        if (theFromWave < 0)
+        {
+            Core.gLogger.Msg(a11yCtx);
+        }
+        else
+        {
+            A11y.SR.Speak(a11yText, a11yCtx);
+        }
     }
 
     [HarmonyPatch("AddZombieAtCell")]
