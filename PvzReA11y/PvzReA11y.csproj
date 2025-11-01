@@ -503,5 +503,9 @@
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="COPY &quot;$(TargetPath)&quot; &quot;D:\SteamLibrary\steamapps\common\PVZ Replanted\Mods&quot;" />
+
+		<!-- MOD files -->
+		<Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\PvzReA11yMod\Mods&quot;" />
+		<Exec Command="COPY &quot;$(ProjectDir)..\LICENSE&quot; &quot;$(ProjectDir)..\PvzReA11yMod\A11yDocs\LICENSE.txt&quot;" />
 	</Target>
 </Project>
