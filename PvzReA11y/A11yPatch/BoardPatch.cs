@@ -90,7 +90,12 @@ internal class BoardPatch
     [HarmonyPostfix]
     static void StartLevel()
     {
-        Core.gLogger.Msg($"Board.StartLevel()");
+        string a11yCtx = "Board.StartLevel()";
+        string a11yText = $"关卡开始";
+        // TODO: 草地行数不正确
+        //a11yText += $"：共 {BoardPatch.cachedBoard?.GetNumRows()} 行草地";
+
+        A11y.SR.Speak(a11yText, a11yCtx);
 
         PrintBoardDynamicInfo();
     }
