@@ -28,7 +28,7 @@ public class ChosenSeedPatch
         }
 
         var sb = new StringBuilder();
-        sb.AppendLine($"ChosenSeed.Selected(seedChooserScreen={seedChooserScreen}, player={playerIndex})");
+        sb.AppendLine($"ChosenSeed.Selected(SeedChooserScreen#{seedChooserScreen?.GetHashCode()}, player={playerIndex})");
 
         // 获取种子信息
         string seedType = __instance.mSeedType.ToString();
@@ -38,21 +38,20 @@ public class ChosenSeedPatch
         bool isFlashing = __instance.mFlashing;
         bool isRefreshing = __instance.mRefreshing;
 
-        sb.AppendLine($"  - SeedType: {seedType}");
-        sb.AppendLine($"  - SeedState: {seedState}");
+        // NOTE: 不显示 SeedPacket 包含的信息
+        //sb.AppendLine($"  - SeedType: {seedType}");
+        //sb.AppendLine($"  - SeedState: {seedState}");
         sb.AppendLine($"  - SeedIndexInBank: {seedIndexInBank}");
-        sb.AppendLine($"  - IsImitater: {isImitater}");
-        sb.AppendLine($"  - IsFlashing: {isFlashing}");
+        //sb.AppendLine($"  - IsImitater: {isImitater}");
+        //sb.AppendLine($"  - IsFlashing: {isFlashing}");
         sb.AppendLine($"  - IsRefreshing: {isRefreshing}");
 
-        // 如果是模仿者种子，还要显示模仿的种子类型
-        if (isImitater)
-        {
-            string imitaterType = __instance.mImitaterType.ToString();
-            sb.AppendLine($"  - ImitaterType: {imitaterType}");
-        }
+        // SeedChooserScreen.ClickedSeedInChooser：
+        //      添加植物 XX
+        string a11yText = $"到 {seedIndexInBank+1}";
+        // TODO: 处理手牌满的情况 seedIndexInBank==0
 
-        Core.gLogger.Msg(sb.ToString());
+        A11y.SR.SpeakQueue(a11yText, sb.ToString());
     }
 
     /// <summary>

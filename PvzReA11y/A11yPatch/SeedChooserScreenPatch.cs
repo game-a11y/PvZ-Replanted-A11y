@@ -184,7 +184,12 @@ namespace PvzReA11y.A11yPatch
                 sb.AppendLine($"  - ImitaterType: {imitaterType}");
             }
 
-            Core.gLogger.Msg(sb.ToString());
+            // TODO: 处理手牌满的情况
+            string a11yText = $"添加植物 {seedType}";
+            //if (isImitater) a11yText += "，模仿者";
+            if (notSuggested) a11yText += "（不推荐）";
+
+            A11y.SR.Speak(a11yText, sb.ToString());
         }
 
         /// <summary>
