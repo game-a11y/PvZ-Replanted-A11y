@@ -40,6 +40,9 @@ internal class SelectablePatch
             if ("Center" == objParent && "Arrows" == objectName) return true;
         }
 
+        // 植物选择界面：玩家2 占位控件
+        if ("SeedChooser" == objParent &&  "GridNavigationContainer" == objectType) return true;
+
         return false;
     }
 

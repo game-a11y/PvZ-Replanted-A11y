@@ -32,7 +32,7 @@ internal class A11yText
         ["P_BackButton"] = "返回 (按钮)",
 
         /* 卡片选择 */
-        ["玩家 2"] = "",  // 抑制背景输出
+        //["玩家 2"] = "",  // 抑制背景输出（在 SelectablePatch 中抑制）
         ["SeedBackground"] = "植物卡片 (暂无无障碍输出)",
 
         /* 【游戏内】菜单 */
