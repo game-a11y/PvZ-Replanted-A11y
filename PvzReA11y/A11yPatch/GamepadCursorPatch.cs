@@ -36,7 +36,11 @@ public class GamepadCursorPatch
         sb.Append($"NewGridPos: ({__instance.m_gridX}, {__instance.m_gridY}), ");
         sb.Append($"Enabled: {__instance.Enabled}");
 
-        Core.gLogger.Msg(sb.ToString());
+        // TODO: 获取当前选中的网格状态
+        string a11yText = $"行 {__instance.m_gridY + 1}, 列 {__instance.m_gridX + 1}";
+        string a11yCtx = sb.ToString();
+
+        A11y.SR.Speak(a11yText, a11yCtx);
     }
 
     // [HarmonyPostfix]
