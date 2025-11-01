@@ -28,10 +28,21 @@ internal class A11yText
         ["VibrationP_CheckBox (1)"] = "震动 (复选框)",
         ["V-SyncP_CheckBox"] = "垂直同步 (复选框)",
 
+        /* 【关卡选择】 */
+        ["P_BackButton"] = "返回 (按钮)",
+
+        /* 卡片选择 */
+        ["玩家 2"] = "",  // 抑制背景输出
+        ["SeedBackground"] = "植物卡片 (暂无无障碍输出)",
+
         /* 【游戏内】菜单 */
         ["Button"] = "僵尸形象 (按钮)",
         ["headcrab _CheckBox"] = "猎头蟹 (复选框)",
         ["retroZombie _CheckBox"] = "复古僵尸 (复选框)",
+
+        /* 【游戏内】 */
+        ["Shovel"] = "铲子",
+        ["P_AccelerationButton"] = "游戏加速 (按钮)",
     };
 
     public static string GetA11yText(string key, string ctx = null)
