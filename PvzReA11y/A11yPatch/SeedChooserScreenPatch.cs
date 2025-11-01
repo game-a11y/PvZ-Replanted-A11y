@@ -89,7 +89,7 @@ namespace PvzReA11y.A11yPatch
             bool isImitater = seed.mIsImitater;
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"SeedChooserScreen.ClickedSeedInBank(ChosenSeed) - Player {playerIndex}");
+            sb.AppendLine($"SeedChooserScreen.ClickedSeedInBank(ChosenSeed#{seed?.GetHashCode()}, player={playerIndex})");
             sb.AppendLine($"  - SeedType: {seedType}");
             sb.AppendLine($"  - SeedState: {seedState}");
             sb.AppendLine($"  - SeedIndexInBank: {seedIndexInBank}");
@@ -101,7 +101,10 @@ namespace PvzReA11y.A11yPatch
                 sb.AppendLine($"  - ImitaterType: {imitaterType}");
             }
 
-            Core.gLogger.Msg(sb.ToString());
+            string a11yText = $"移除植物 {seedType}";
+            //if (isImitater) a11yText += "，模仿者";
+
+            A11y.SR.Speak(a11yText, sb.ToString());
         }
 
         /// <summary>
