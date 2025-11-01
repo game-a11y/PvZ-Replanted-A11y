@@ -48,32 +48,7 @@ internal class SelectablePatch
     [HarmonyPostfix]
     static void OnSelect_Postfix(Selectable __instance, BaseEventData eventData)
     {
-        if (__instance == null) return;
-
-        // 获取基本信息
-        string objectName = __instance.gameObject.name ?? "Unknown";
-        string objectType = __instance.GetType().Name;
-        string objectText = GetSelectableText(__instance);
-        string objParent = "";
-        if (__instance.transform != null && __instance.transform.parent != null)
-        {
-            objParent = __instance.transform.parent.name;
-        }
-
-        // 语音播报
-        string a11yText = objectText;
-        if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
-        string a11tCtx = $"{objParent} > {objectName}: {objectType}";
-        a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
-        if (NeedSkipA11yOutput(__instance))
-        {
-            Core.gLogger.Msg($"Selectable.OnSelect(): '{a11yText}'");
-            Core.gLogger.Msg($"    {a11tCtx}");
-        }
-        else
-        {
-            A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
-        }
+        HandleSelectableEvent(__instance, "Selectable.OnSelect()");
     }
 
     /// <summary>
@@ -86,24 +61,37 @@ internal class SelectablePatch
     [HarmonyPostfix]
     static void OnPointerEnter_Postfix(Selectable __instance, PointerEventData eventData)
     {
-        if (__instance == null) return;
+        HandleSelectableEvent(__instance, "Selectable.OnPointerEnter()");
+    }
+
+    /// <summary>
+    /// 处理 Selectable 事件的通用方法
+    /// </summary>
+    /// <param name="instance">Selectable 实例</param>
+    /// <param name="eventName">事件名称</param>
+    private static void HandleSelectableEvent(Selectable instance, string eventName)
+    {
+        if (instance == null) return;
 
         // 获取基本信息
-        string objectName = __instance.gameObject.name ?? "Unknown";
-        string objectType = __instance.GetType().Name;
+        string objectName = instance.gameObject.name ?? "Unknown";
+        string objectType = instance.GetType().Name;
+        string objectText = GetSelectableText(instance);
         string objParent = "";
-        if (__instance.transform != null && __instance.transform.parent != null)
+        if (instance.transform != null && instance.transform.parent != null)
         {
-            objParent = __instance.transform.parent.name;
+            objParent = instance.transform.parent.name;
         }
 
-        string a11yText = GetSelectableText(__instance);
+        // 语音播报
+        string a11yText = objectText;
         if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
         string a11tCtx = $"{objParent} > {objectName}: {objectType}";
-        a11tCtx += $";  Interactable: {__instance.interactable}, IsActive: {__instance.IsActive()}";
-        if (NeedSkipA11yOutput(__instance))
+        a11tCtx += $";  Interactable: {instance.interactable}, IsActive: {instance.IsActive()}";
+        
+        if (NeedSkipA11yOutput(instance))
         {
-            Core.gLogger.Msg($"Selectable.OnPointerEnter(): '{a11yText}'");
+            Core.gLogger.Msg($"{eventName}: '{a11yText}'");
             Core.gLogger.Msg($"    {a11tCtx}");
         }
         else
