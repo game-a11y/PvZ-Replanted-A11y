@@ -481,6 +481,7 @@
 		<Compile Include="A11yPatch\EventSystemPatch.cs" />
 		<Compile Include="A11yPatch\ExitGamePatch.cs" />
 		<Compile Include="A11yPatch\GameButtonPatch.cs" />
+		<Compile Include="A11yPatch\GamepadCursorControllerPatch.cs" />
 		<Compile Include="A11yPatch\GameplayActivityPatch.cs" />
 		<Compile Include="A11yPatch\GameplayOptionsMenuPatch.cs" />
 		<Compile Include="A11yPatch\GridNavigationContainerPatch.cs" />
