@@ -33,6 +33,7 @@ public class ChosenSeedPatch
         // 获取种子信息
         string seedType = __instance.mSeedType.ToString();
         string seedState = __instance.mSeedState.ToString();
+        bool isAddSeed = __instance.mSeedState == ChosenSeedState.SeedFlyingToBank;
         int seedIndexInBank = __instance.mSeedIndexInBank;
         bool isImitater = __instance.mIsImitater;
         bool isFlashing = __instance.mFlashing;
@@ -51,7 +52,14 @@ public class ChosenSeedPatch
         string a11yText = $"到 {seedIndexInBank+1}";
         // TODO: 处理手牌满的情况 seedIndexInBank==0
 
-        A11y.SR.SpeakQueue(a11yText, sb.ToString());
+        if (isAddSeed)
+        {
+            A11y.SR.SpeakQueue(a11yText, sb.ToString());
+        }
+        else
+        {
+            Core.gLogger.Msg(sb.ToString());
+        }
     }
 
     /// <summary>

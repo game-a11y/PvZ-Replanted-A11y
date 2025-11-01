@@ -2,6 +2,8 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using System.Text;
 using static Il2CppReloaded.Gameplay.SeedChooserScreen;
+using static MelonLoader.MelonLogger;
+using static UnityEngine.ParticleSystem.PlaybackState;
 
 namespace PvzReA11y.A11yPatch
 {
@@ -168,6 +170,7 @@ namespace PvzReA11y.A11yPatch
 
             string seedType = theChosenSeed.mSeedType.ToString();
             string seedState = theChosenSeed.mSeedState.ToString();
+            bool isAddSeed = theChosenSeed.mSeedState == ChosenSeedState.SeedFlyingToBank;
             bool isImitater = theChosenSeed.mIsImitater;
             bool isFlashing = theChosenSeed.mFlashing;
             bool isFlying = theChosenSeed.mFlying;
@@ -188,9 +191,17 @@ namespace PvzReA11y.A11yPatch
             }
 
             // TODO: 处理手牌满的情况
-            string a11yText = $"添加植物 {seedType}";
-            //if (isImitater) a11yText += "，模仿者";
-            if (notSuggested) a11yText += "（不推荐）";
+            string a11yText = $"植物选择已满，点击植物 {seedType}";
+            if (isAddSeed)
+            {
+                a11yText = $"添加植物 {seedType}";
+                //if (isImitater) a11yText += "，模仿者";
+                if (notSuggested) a11yText += "（不推荐）";
+            }
+            else if (theChosenSeed.mSeedState == ChosenSeedState.SeedFlyingToChooser)
+            {
+                a11yText = $"取消添加植物 {seedType}";
+            }
 
             A11y.SR.Speak(a11yText, sb.ToString());
         }
