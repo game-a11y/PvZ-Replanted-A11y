@@ -104,11 +104,16 @@ internal class BoardPatch
     /// <param name="theGridY">网格坐标 Y</param>
     /// <param name="theSeedType">种子类型</param>
     /// <param name="theImitaterType">模仿者类型</param>
+    /// TODO: Prefix 拦截种植，同一位置种植两次，第一次输出文本，第二次种下植物
     [HarmonyPatch("AddPlant")]
     [HarmonyPostfix]
     static void AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
     {
-        Core.gLogger.Msg($"Board.AddPlant(X={theGridX}, Y={theGridY}, SeedType={theSeedType}, ImitaterType={theImitaterType})");
+        string a11yText = $"(行 {theGridY+1}, 列 {theGridX+1}) 种植 {theSeedType}";
+        string a11yCtx = $"Board.AddPlant():" +
+            $" X={theGridX}, Y={theGridY}, SeedType={theSeedType}, ImitaterType={theImitaterType}";
+
+        A11y.SR.Speak(a11yText, a11yCtx);
     }
 
     /// <summary>
@@ -186,7 +191,11 @@ internal class BoardPatch
     [HarmonyPostfix]
     static void AddZombieInRow(ZombieType theZombieType, int theRow, int theFromWave, bool shakeBrush)
     {
-        Core.gLogger.Msg($"Board.AddZombieInRow(ZombieType={theZombieType}, Row={theRow}, FromWave={theFromWave}, shakeBrush={shakeBrush})");
+        string a11yText = $"第 {theRow+1} 行，{theZombieType} 僵尸";
+        string a11yCtx = $"Board.AddZombieInRow():" +
+            $" ZombieType={theZombieType}, Row={theRow}, Wave={theFromWave}, shakeBrush={shakeBrush})";
+
+        A11y.SR.Speak(a11yText, a11yCtx);
     }
 
     [HarmonyPatch("AddZombieAtCell")]
