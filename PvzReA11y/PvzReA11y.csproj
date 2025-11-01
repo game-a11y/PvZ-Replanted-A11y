@@ -494,6 +494,7 @@
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
 		<Compile Include="A11yPatch\Tekly\PanelViewPatch.cs" />
 		<Compile Include="A11yPatch\WidgetManagerPatch.cs" />
+		<Compile Include="A11yText.cs" />
 		<Compile Include="A11y\SR.cs" />
 		<Compile Include="A11y\TolkSafe.cs" />
 		<Compile Include="A11y\TolkMock.cs" />

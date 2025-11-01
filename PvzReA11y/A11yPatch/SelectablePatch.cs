@@ -12,6 +12,11 @@ namespace PvzReA11y.A11yPatch;
 [HarmonyPatch(typeof(Selectable))]
 internal class SelectablePatch
 {
+    static string GetA11yText(string key)
+    {
+        return A11yText.GetA11yText(key, "Selectable");
+    }
+    
     public static bool NeedSkipA11yOutput(Selectable obj)
     {
         // 获取基本信息
@@ -85,10 +90,18 @@ internal class SelectablePatch
 
         // 语音播报
         string a11yText = objectText;
-        if (string.IsNullOrEmpty(a11yText)) a11yText = objectName;
         string a11tCtx = $"{objParent} > {objectName}: {objectType}";
         a11tCtx += $";  Interactable: {instance.interactable}, IsActive: {instance.IsActive()}";
-        
+
+        if (string.IsNullOrEmpty(a11yText))
+        {
+            a11yText = objectName;
+            // 没有文本内容时，标记 objectText 为空
+            a11tCtx += $";  objectText=''";
+        }
+
+        // 始终查询 A11y 文本
+        a11yText = GetA11yText(a11yText);
         if (NeedSkipA11yOutput(instance))
         {
             Core.gLogger.Msg($"{eventName}: '{a11yText}'");
