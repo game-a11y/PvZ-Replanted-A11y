@@ -8,7 +8,26 @@
 
 ## 安装模组
 
+游戏的安装目录可以通过 steam 找到：打开 Steam 游戏库，选中游戏名称，右键菜单 > 管理 > 浏览本地文件。
+游戏主程序 Replanted.exe 所在的目录即为游戏的根目录。
+
+1. 安装 MOD 加载器 MelonLoader：使用安装程序版 MelonLoader，或者下载 MelonLoader 压缩包，解压到游戏根目录。
+确保 "version.dll" 和游戏的主程序 "Replanted.exe" 在同一个文件夹下。
+
+2. 安装无障碍 MOD：将模组内，即此说明文档所在的文件夹，的文件和文件夹解压或复制到游戏根目录。
+确保 "00-重植版无障碍mod说明.txt" 和游戏的主程序 "Replanted.exe" 在同一个文件夹下。
+
 ### 安装成功测试
+
+MelonLoader 安装完成后，"version.dll" 和游戏的主程序 "Replanted.exe" 在同一个文件夹下。
+此目录内有 MelonLoader 创建的5个文件夹："MelonLoader, Mods, Plugins, UserData, UserLibs"
+安装完成后，启动游戏时，会一同打开终端 cmd 窗口，终端会输出日志。
+日志文件位于 "PVZ Replanted\MelonLoader\Latest.log"
+
+无障碍mod安装完成后，"00-重植版无障碍mod说明.txt" 和游戏的主程序 "Replanted.exe" 在同一个文件夹下。
+并且多出一个 A11yDocs 文件夹存放无障碍mod的说明文档；mod 本体 A11yMod.dll 放置在 mods 文件夹中；mod 的依赖放置在 UserLibs 文件夹中。
+无障碍 mod 安装成功时，启动游戏，在游戏的日志中，搜索 "A11y Mod" 可以看见 mod 的信息（版本、作者、对应的 dll 名）
+如果同时打开了 NVDA 或其他读屏，成功加载 mod 后，能听到 "无障碍 MOD 初始化成功"
 
 
 ## 手柄操作说明
