@@ -9,5 +9,8 @@ $timestamp = Get-Date -Format "yyyyMMdd-HHmm"
 $zipFileName = "PvzReA11yMod-重植版无障碍MOD-v$timestamp.zip"
 
 Write-Host "++开始打包 PvzReA11yMod 文件夹..."
-Compress-Archive -Path "PvzReA11yMod\*" -DestinationPath $zipFileName -Force
+# 打包 PvzReA11yMod 文件夹内容（不包含文件夹本身）
+Push-Location "PvzReA11yMod"
+Compress-Archive -Path "*" -DestinationPath "..\$zipFileName" -Force
+Pop-Location
 Write-Host "打包完成! 文件保存为: \"$zipFileName\"" -ForegroundColor Green
