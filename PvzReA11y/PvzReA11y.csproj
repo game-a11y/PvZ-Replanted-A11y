@@ -471,6 +471,7 @@
 		<Compile Include="A11yPatch\BootstrapPatch.cs" />
 		<Compile Include="A11yPatch\CardboardControllerPatch.cs" />
 		<Compile Include="A11yPatch\BoardPatch.cs" />
+		<Compile Include="A11yPatch\ChosenSeedPatch.cs" />
 		<Compile Include="A11yPatch\ConfirmPanelViewPatch.cs" />
 		<Compile Include="A11yPatch\CrazyDaveStoreInitializerPatch.cs" />
 		<Compile Include="A11yPatch\CutScenePatch.cs" />
@@ -500,6 +501,10 @@
 		<Compile Include="A11y\TolkMock.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Utils.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ReplantAPI\" />
 	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
