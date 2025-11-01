@@ -33,7 +33,7 @@ internal class A11yText
 
         /* 卡片选择 */
         //["玩家 2"] = "",  // 抑制背景输出（在 SelectablePatch 中抑制）
-        ["SeedBackground"] = "植物卡片 (暂无无障碍输出)",
+        ["SeedBackground"] = "植物卡",
 
         /* 【游戏内】菜单 */
         ["Button"] = "僵尸形象 (按钮)",
