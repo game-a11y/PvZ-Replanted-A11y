@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Il2CppReloaded.Gameplay;
+using System.Text;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -26,6 +27,9 @@ public class ChosenSeedPatch
             return;
         }
 
+        var sb = new StringBuilder();
+        sb.AppendLine($"ChosenSeed.Selected(seedChooserScreen={seedChooserScreen}, player={playerIndex})");
+
         // 获取种子信息
         string seedType = __instance.mSeedType.ToString();
         string seedState = __instance.mSeedState.ToString();
@@ -34,20 +38,21 @@ public class ChosenSeedPatch
         bool isFlashing = __instance.mFlashing;
         bool isRefreshing = __instance.mRefreshing;
 
-        Core.gLogger.Msg($"ChosenSeed.Selected() - Player {playerIndex}");
-        Core.gLogger.Msg($"  - SeedType: {seedType}");
-        Core.gLogger.Msg($"  - SeedState: {seedState}");
-        Core.gLogger.Msg($"  - SeedIndexInBank: {seedIndexInBank}");
-        Core.gLogger.Msg($"  - IsImitater: {isImitater}");
-        Core.gLogger.Msg($"  - IsFlashing: {isFlashing}");
-        Core.gLogger.Msg($"  - IsRefreshing: {isRefreshing}");
+        sb.AppendLine($"  - SeedType: {seedType}");
+        sb.AppendLine($"  - SeedState: {seedState}");
+        sb.AppendLine($"  - SeedIndexInBank: {seedIndexInBank}");
+        sb.AppendLine($"  - IsImitater: {isImitater}");
+        sb.AppendLine($"  - IsFlashing: {isFlashing}");
+        sb.AppendLine($"  - IsRefreshing: {isRefreshing}");
 
         // 如果是模仿者种子，还要显示模仿的种子类型
         if (isImitater)
         {
             string imitaterType = __instance.mImitaterType.ToString();
-            Core.gLogger.Msg($"  - ImitaterType: {imitaterType}");
+            sb.AppendLine($"  - ImitaterType: {imitaterType}");
         }
+
+        Core.gLogger.Msg(sb.ToString());
     }
 
     /// <summary>
@@ -68,6 +73,9 @@ public class ChosenSeedPatch
             return;
         }
 
+        var sb = new StringBuilder();
+        sb.AppendLine($"ChosenSeed.Imitated(seedChooserScreen={seedChooserScreen}, index={index}， player={playerIndex})");
+
         // 获取种子信息
         string seedType = __instance.mSeedType.ToString();
         string imitaterType = __instance.mImitaterType.ToString();
@@ -77,23 +85,17 @@ public class ChosenSeedPatch
         bool isFlashing = __instance.mFlashing;
         bool isRefreshing = __instance.mRefreshing;
 
-        Core.gLogger.Msg($"ChosenSeed.Imitated() - Player {playerIndex}, Index {index}");
-        Core.gLogger.Msg($"  - SeedType: {seedType}");
-        Core.gLogger.Msg($"  - ImitaterType: {imitaterType}");
-        Core.gLogger.Msg($"  - SeedState: {seedState}");
-        Core.gLogger.Msg($"  - SeedIndexInBank: {seedIndexInBank}");
-        Core.gLogger.Msg($"  - IsImitater: {isImitater}");
-        Core.gLogger.Msg($"  - IsFlashing: {isFlashing}");
-        Core.gLogger.Msg($"  - IsRefreshing: {isRefreshing}");
+        sb.AppendLine($"  - SeedType: {seedType}");
+        sb.AppendLine($"  - ImitaterType: {imitaterType}");
+        sb.AppendLine($"  - SeedState: {seedState}");
+        sb.AppendLine($"  - SeedIndexInBank: {seedIndexInBank}");
+        sb.AppendLine($"  - IsImitater: {isImitater}");
+        sb.AppendLine($"  - IsFlashing: {isFlashing}");
+        sb.AppendLine($"  - IsRefreshing: {isRefreshing}");
 
         // 显示位置信息
-        Core.gLogger.Msg($"  - Position: ({__instance.mX}, {__instance.mY})");
-        
-        // 如果种子正在移动，显示移动信息
-        if (__instance.mFlying)
-        {
-            Core.gLogger.Msg($"  - Flying: Start({__instance.mStartX}, {__instance.mStartY}) -> End({__instance.mEndX}, {__instance.mEndY})");
-            Core.gLogger.Msg($"  - Motion: Time {__instance.mTimeInMotion}/{__instance.mDurationOfMotion}");
-        }
+        sb.AppendLine($"  - Position: ({__instance.mX}, {__instance.mY})");
+
+        Core.gLogger.Msg(sb.ToString());
     }
 }
