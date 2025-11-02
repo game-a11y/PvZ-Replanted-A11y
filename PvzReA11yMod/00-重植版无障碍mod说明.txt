@@ -1,6 +1,6 @@
 # 《植物大战僵尸：重植版》无障碍 MOD
 
-版本: v20251101-尝鲜版   仅主菜单可用
+版本: v20251102-尝鲜版   基本可玩性支持
 作者: inkydragon @ Bilibili/Github
 项目: https://github.com/game-a11y/PvZ-Replanted-A11y
 
