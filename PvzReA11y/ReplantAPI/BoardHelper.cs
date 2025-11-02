@@ -1,5 +1,6 @@
 using Il2CppReloaded.Gameplay;
 using Il2CppTekly.DataModels.Binders;
+using PvzReA11y.A11yPatch;
 using System.Text;
 
 namespace PvzReA11y.ReplantAPI;
@@ -159,6 +160,8 @@ public static class BoardHelper
         a11ySb.Append($"{(hasGraves ? "、有墓碑" : "")}");
         // TODO: 草地行数不准确
         //a11ySb.Append($"，行数 {numRows}");
+        GameMode gameMode = GameplayActivityPatch.GetCachedGameplayActivity()?.GameMode ?? GameMode.NumGameModes;
+        // a11ySb.Append($"，游戏模式：{gameMode}");
 
         // 统计泳池行、草地可种植行、是否存在墓碑与 ScaryPot
         var poolRows = new System.Collections.Generic.List<int>(); // 1-based 行号
@@ -197,6 +200,7 @@ public static class BoardHelper
         ctx.Append($"[AnnounceLevelIntro] NumRows={numRows}, NoGrass={noGrass}");
         ctx.Append($", PoolRows={(poolRows.Count > 0 ? string.Join(",", poolRows) : "None")}");
         ctx.Append($", HasScaryPot={hasAnyScaryPot}");
+        ctx.Append($", GameMode={gameMode}");
 
         A11y.SR.Speak(a11ySb.ToString(), ctx.ToString());
     }

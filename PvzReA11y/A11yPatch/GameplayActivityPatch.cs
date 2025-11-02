@@ -11,14 +11,24 @@ namespace PvzReA11y.A11yPatch;
 [HarmonyPatch(typeof(GameplayActivity))]
 public class GameplayActivityPatch
 {
+    // 缓存 GameplayActivity 对象
+    private static GameplayActivity s_gameplayActivity;
+
+    public static GameplayActivity GetCachedGameplayActivity() => s_gameplayActivity;
+
     /// <summary>
-    /// Hook GameplayActivity.NewGame 方法，在新游戏开始后记录日志
+    /// Hook GameplayActivity.NewGame 方法，在新游戏开始后记录日志并缓存实例
     /// </summary>
     [HarmonyPatch(nameof(GameplayActivity.NewGame))]
     [HarmonyPostfix]
-    public static void NewGame_Postfix()
+    public static void NewGame_Postfix(GameplayActivity __instance)
     {
         Core.gLogger.Msg("GameplayActivity.NewGame()");
+        if (s_gameplayActivity != __instance)
+        {
+            s_gameplayActivity = __instance;
+            Core.gLogger.Msg($"  Cached: GameplayActivity#{__instance?.GetHashCode():X8}");
+        }
     }
 
     /// <summary>
