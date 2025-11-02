@@ -1,6 +1,6 @@
+using System.Text;
 using HarmonyLib;
 using Il2CppUI.Scripts;
-using MelonLoader;
 
 namespace PvzReA11y.A11yPatch
 {
@@ -45,21 +45,39 @@ namespace PvzReA11y.A11yPatch
         // TODO: 鼠标点击会被触发两次。
         [HarmonyPatch(nameof(LevelSelectScreen.SetSelectedLevelIndex), typeof(int))]
         [HarmonyPostfix]
-        public static void SetSelectedLevelIndex_Postfix(int level)
+        public static void SetSelectedLevelIndex_Postfix(LevelSelectScreen __instance, int level)
         {
-            Core.gLogger.Msg($"LevelSelectScreen.SetSelectedLevelIndex(level={level})");
+            if (__instance == null) return;
+
+            // TODO: 获取现有的文本
+            string a11yText = $"关卡 {level + 1}";
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"LevelSelectScreen.SetSelectedLevelIndex(level={level})");
+            sb.Append($": lastCarouselSel={LevelSelectScreen.s_lastCarouselSelection}, lastCarouselLvSel={LevelSelectScreen.s_lastCarouselLevelSelection}");
+            sb.Append($", isFirstVisit={__instance.m_isFirstVisit}, levelSelectIsActive={__instance.m_levelSelectIsActive}");
+            sb.Append($", reachedCarousel={__instance.ReachedCarousel}");
+            sb.Append($", backButton={__instance.m_backButton}");
+            string a11yCtx = sb.ToString();
+
+            A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
         }
 
-        [HarmonyPatch("ShowCarousel", typeof(Il2CppUI.Scripts.LevelSelectCarouselGroup))]
+        [HarmonyPatch("ShowCarousel", typeof(LevelSelectCarouselGroup))]
         [HarmonyPostfix]
-        public static void ShowCarousel_Postfix(Il2CppUI.Scripts.LevelSelectCarouselGroup carouselGroup)
+        public static void ShowCarousel_Postfix(LevelSelectCarouselGroup carouselGroup)
         {
-            Core.gLogger.Msg($"LevelSelectScreen.ShowCarousel(carouselGroup=LevelSelectCarouselGroup#{carouselGroup?.GetHashCode()})");
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"LevelSelectScreen.ShowCarousel(");
+            sb.Append($"newCarouselGroup=LevelSelectCarouselGroup#{carouselGroup?.GetHashCode()})");
+            sb.Append($": .levelCarousel=LevelSelectCarousel#{carouselGroup?.levelCarousel?.GetHashCode()}");
+            sb.Append($", .levelCarousel.offset={carouselGroup?.levelCarousel?.m_offset}");
+            
+            Core.gLogger.Msg(sb.ToString());
         }
 
-        [HarmonyPatch("UpdateSelectedCarousel", typeof(Il2CppUI.Scripts.LevelSelectCarouselGroup))]
+        [HarmonyPatch("UpdateSelectedCarousel", typeof(LevelSelectCarouselGroup))]
         [HarmonyPostfix]
-        public static void UpdateSelectedCarousel_Postfix(Il2CppUI.Scripts.LevelSelectCarouselGroup newCarouselGroup)
+        public static void UpdateSelectedCarousel_Postfix(LevelSelectCarouselGroup newCarouselGroup)
         {
             Core.gLogger.Msg($"LevelSelectScreen.UpdateSelectedCarousel(newCarouselGroup=LevelSelectCarouselGroup#{newCarouselGroup?.GetHashCode()})");
         }

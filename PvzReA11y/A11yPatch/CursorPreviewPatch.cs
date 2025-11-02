@@ -7,6 +7,7 @@ namespace PvzReA11y.A11yPatch;
 [HarmonyPatch(typeof(CursorPreview))]
 public class CursorPreviewPatch
 {
+    // TODO: 输出当前植物名
     /// <summary>
     /// 游戏内植物选择，光标预览更新时的后置钩子
     /// </summary>
