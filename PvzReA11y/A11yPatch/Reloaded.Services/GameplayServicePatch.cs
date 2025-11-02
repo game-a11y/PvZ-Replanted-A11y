@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppReloaded.Services;
 using Il2CppReloaded.Data;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Services;
 
 [HarmonyPatch(typeof(GameplayService))]
 public static class GameplayServicePatch
