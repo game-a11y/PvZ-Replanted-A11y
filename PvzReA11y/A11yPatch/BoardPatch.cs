@@ -114,7 +114,8 @@ internal class BoardPatch
     [HarmonyPostfix]
     static void AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
     {
-        string a11yText = $"(行 {theGridY+1}, 列 {theGridX+1}) 种植 {theSeedType}";
+        string seedType = A11yText.GetSeedTypeZh(theSeedType);
+        string a11yText = $"(行 {theGridY+1}, 列 {theGridX+1}) 种下 {seedType}";
         string a11yCtx = $"Board.AddPlant():" +
             $" X={theGridX}, Y={theGridY}, SeedType={theSeedType}, ImitaterType={theImitaterType}";
 

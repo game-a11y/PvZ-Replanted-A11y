@@ -41,7 +41,8 @@ public class CursorPreviewPatch
             // sb.Append(", CurrentPlant=Error(").Append(ex.Message).Append(")");
         }
     
-        string a11yText = $"植物 {currentSeedType}";
+        // 植物 currentSeedType
+        string a11yText = $"{A11yText.GetSeedTypeZh(currentSeedType)}";
         string a11yCtx = sb.ToString();
 
         A11y.SR.SpeakInterrupt(a11yText, a11yCtx);

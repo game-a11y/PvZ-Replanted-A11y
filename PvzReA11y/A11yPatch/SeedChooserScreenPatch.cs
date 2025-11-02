@@ -103,7 +103,7 @@ namespace PvzReA11y.A11yPatch
                 sb.AppendLine($"  - ImitaterType: {imitaterType}");
             }
 
-            string a11yText = $"移除植物 {seedType}";
+            string a11yText = $"移除植物 {A11yText.GetSeedTypeZh(seed.mSeedType)}";
             //if (isImitater) a11yText += "，模仿者";
 
             A11y.SR.Speak(a11yText, sb.ToString());
@@ -142,7 +142,7 @@ namespace PvzReA11y.A11yPatch
 
             if (thePacket.mImitaterType != SeedType.None)
             {
-                string imitaterType = thePacket.mImitaterType.ToString();
+                string imitaterType = A11yText.GetSeedTypeZh(thePacket.mImitaterType);
                 sb.AppendLine($"  - ImitaterType: {imitaterType}");
             }
 
@@ -186,11 +186,12 @@ namespace PvzReA11y.A11yPatch
 
             if (isImitater)
             {
-                string imitaterType = theChosenSeed.mImitaterType.ToString();
+                string imitaterType = A11yText.GetSeedTypeZh(theChosenSeed.mImitaterType);
                 sb.AppendLine($"  - ImitaterType: {imitaterType}");
             }
 
             // TODO: 处理手牌满的情况
+            seedType = A11yText.GetSeedTypeZh(theChosenSeed.mSeedType);
             string a11yText = $"植物选择已满，点击植物 {seedType}";
             if (isAddSeed)
             {
