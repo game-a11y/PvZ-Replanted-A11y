@@ -169,4 +169,63 @@ internal class A11yText
             _ => notEmptyKey
         };
     }
+
+    private static readonly Dictionary<ZombieType, string> ZombieType_ZH = new()
+    {
+        [ZombieType.Invalid] = "",
+
+        // 常规僵尸
+        [ZombieType.Normal] = "普通僵尸",
+        [ZombieType.Flag] = "旗帜僵尸",
+        [ZombieType.TrafficCone] = "路障僵尸",
+        [ZombieType.Polevaulter] = "撑杆跳僵尸",
+        [ZombieType.Pail] = "铁桶僵尸",
+        [ZombieType.Newspaper] = "读报僵尸",
+        [ZombieType.Door] = "铁门僵尸",
+        [ZombieType.Football] = "橄榄球僵尸",
+
+        // 特殊僵尸
+        [ZombieType.Dancer] = "舞王僵尸",
+        [ZombieType.BackupDancer] = "伴舞僵尸",
+        [ZombieType.DuckyTube] = "泳圈僵尸",
+        [ZombieType.Snorkel] = "潜水僵尸",
+        [ZombieType.Zamboni] = "冰车僵尸",
+        [ZombieType.Bobsled] = "雪橇僵尸",
+        [ZombieType.DolphinRider] = "海豚僵尸",
+        [ZombieType.JackInTheBox] = "小丑僵尸",
+        [ZombieType.Balloon] = "气球僵尸",
+        [ZombieType.Digger] = "矿工僵尸",
+        [ZombieType.Pogo] = "跳跳僵尸",
+        [ZombieType.Yeti] = "雪人僵尸",
+        [ZombieType.Bungee] = "蹦极僵尸",
+        [ZombieType.Ladder] = "梯子僵尸",
+        [ZombieType.Catapult] = "投篮僵尸",
+        [ZombieType.Gargantuar] = "巨人僵尸",
+        [ZombieType.Imp] = "小鬼僵尸",
+        [ZombieType.Boss] = "僵尸博士",
+
+        // 头像与特殊展示
+        [ZombieType.PeaHead] = "豌豆头僵尸",
+        [ZombieType.WallnutHead] = "坚果头僵尸",
+        [ZombieType.JalapenoHead] = "火爆辣椒头僵尸",
+        [ZombieType.GatlingHead] = "机枪射手头僵尸",
+        [ZombieType.SquashHead] = "窝瓜头僵尸",
+        [ZombieType.TallnutHead] = "高坚果头僵尸",
+        [ZombieType.RedeyeGargantuar] = "红眼巨人僵尸",
+        [ZombieType.Zombatar] = "僵尸形象",
+        [ZombieType.Target] = "靶子僵尸",
+        [ZombieType.TrashCan] = "垃圾桶僵尸",
+        [ZombieType.Gravestone] = "墓碑僵尸",
+    };
+
+    /// <summary>
+    /// ZombieType 转中文僵尸名。未映射则返回英文名，Invalid 返回“”。
+    /// </summary>
+    public static string GetZombieTypeZh(ZombieType zombieType)
+    {
+        if (ZombieType_ZH.TryGetValue(zombieType, out var name))
+            return name;
+
+        return zombieType.ToString();
+    }
 }
