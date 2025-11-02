@@ -21,12 +21,19 @@ public class DialogPatch
     {
         if (__instance == null) return;
 
-        Core.gLogger.Msg($"Dialog.Show(isZenGarden={isZenGarden})");
         StringBuilder sb = new StringBuilder();
-        sb.Append($" Type: {__instance.mDialogType},");
-        sb.Append($" Header: {__instance.mDialogHeader},");
-        sb.Append($" Lines:  {__instance.mDialogLines},");
-        sb.Append($" Footer: '{__instance.mDialogFooter}',");
-        Core.gLogger.Msg(sb.ToString());
+        sb.Append($"Dialog.Show(isZenGarden={isZenGarden})");
+        sb.Append($": Id={__instance.mId}");
+        sb.Append($", IsModal={__instance.mIsModal}");
+        sb.Append($", Type={__instance.mDialogType}");
+        sb.Append($", Header={__instance.mDialogHeader}");
+        sb.Append($", Lines={__instance.mDialogLines}");
+        sb.Append($", Footer='{__instance.mDialogFooter}'");
+
+        string a11yText = $"'{__instance.mDialogHeader}': {__instance.mDialogLines}";
+        string a11yCtx = sb.ToString();
+
+        // 补充弹窗内容
+        A11y.SR.SpeakQueue(a11yText, a11yCtx);
     }
 }

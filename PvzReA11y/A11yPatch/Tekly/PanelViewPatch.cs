@@ -17,6 +17,10 @@ internal class PanelViewPatch
         sb.Append($"PanelView.Show(context='{context}', data={data})");
         sb.Append($": Id={__instance.Id}");
 
-        Core.gLogger.Msg(sb.ToString());
+        string a11yText = $"{__instance.Id}";
+        string a11yCtx = sb.ToString();
+
+        // 补充弹窗内容
+        A11y.SR.SpeakQueue(a11yText, a11yCtx);
     }
 }
