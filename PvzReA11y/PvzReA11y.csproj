@@ -501,6 +501,7 @@
 		<Compile Include="A11yPatch\SeedChooserScreenPatch.cs" />
 		<Compile Include="A11yPatch\SelectablePatch.cs" />
 		<Compile Include="A11yPatch\Tekly\PanelViewPatch.cs" />
+		<Compile Include="A11yPatch\UnityEngine.UI\ButtonPatch.cs" />
 		<Compile Include="A11yPatch\WidgetManagerPatch.cs" />
 		<Compile Include="A11yText.cs" />
 		<Compile Include="A11y\SR.cs" />

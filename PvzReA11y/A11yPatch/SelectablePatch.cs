@@ -77,7 +77,7 @@ internal class SelectablePatch
     /// </summary>
     /// <param name="instance">Selectable 实例</param>
     /// <param name="eventName">事件名称</param>
-    private static void HandleSelectableEvent(Selectable instance, string eventName)
+    public static void HandleSelectableEvent(Selectable instance, string eventName)
     {
         if (instance == null) return;
 
@@ -112,6 +112,7 @@ internal class SelectablePatch
         }
         else
         {
+            a11tCtx = $"[{eventName}] {a11tCtx}";
             A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
         }
     }
