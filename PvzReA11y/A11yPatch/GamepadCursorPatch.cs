@@ -40,7 +40,7 @@ public class GamepadCursorPatch
         string a11yText = $"行 {__instance.m_gridY + 1}, 列 {__instance.m_gridX + 1}";
         string a11yCtx = sb.ToString();
 
-        A11y.SR.Speak(a11yText, a11yCtx);
+        A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
     }
 
     // [HarmonyPostfix]
