@@ -3,7 +3,7 @@ using Il2CppSource.Controllers;
 using PvzReA11y.A11y;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(MessageWidgetController))]
 public class MessageWidgetControllerPatch

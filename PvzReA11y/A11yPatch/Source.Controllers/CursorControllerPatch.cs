@@ -4,7 +4,7 @@ using Il2CppSource.Controllers;
 using PvzReA11y;
 using System.Text;
 
-namespace A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(CursorController))]
 public class CursorControllerPatch

@@ -3,7 +3,7 @@ using Il2CppSource.Controllers;
 using UnityEngine;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(GamepadCursorController))]
 public class GamepadCursorControllerPatch

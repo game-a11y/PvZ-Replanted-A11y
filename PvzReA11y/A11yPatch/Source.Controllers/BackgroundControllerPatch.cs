@@ -3,7 +3,7 @@ using Il2CppReloaded.Gameplay;
 using Il2CppSource.Controllers;
 using UnityEngine;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(BackgroundController))]
 public class BackgroundControllerPatch

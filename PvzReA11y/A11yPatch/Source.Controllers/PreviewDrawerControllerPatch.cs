@@ -4,7 +4,7 @@ using Il2CppSource.Controllers;
 using MelonLoader;
 using PvzReA11y;
 
-namespace A11y.SR.Patches;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(PreviewDrawerController))]
 public class PreviewDrawerControllerPatch

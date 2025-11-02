@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Il2CppSource.Controllers;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(DialogController))]
 public class DialogControllerPatch

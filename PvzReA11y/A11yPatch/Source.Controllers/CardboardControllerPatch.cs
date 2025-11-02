@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppSource.Controllers;
 using UnityEngine;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Source.Controllers;
 
 [HarmonyPatch(typeof(CardboardController))]
 public class CardboardControllerPatch
