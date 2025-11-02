@@ -45,11 +45,26 @@ public static class BoardHelper
         // 是否可种植
         var plantingReason = s_cachedBoard.CanPlantAt(x, y, seedType);
 
+        string notHereReason = "Not Here";
+        if (PlantingReason.NotHere == plantingReason)
+        {
+            // 检查是否有植物
+            var plant = s_cachedBoard.GetTopPlantAt(x, y, PlantPriority.Any);
+            if (plant != null)
+            {
+                notHereReason = A11yText.GetSeedTypeZh(plant.mSeedType);
+                notHereReason = $"已有植物 {notHereReason}";
+            }
+
+            // TODO: 检查是否为正常地面
+        }
+
         return plantingReason switch
         {
             PlantingReason.Ok => "可种植",
 
-            PlantingReason.NotHere => "Not Here",
+            // 有植物
+            PlantingReason.NotHere => notHereReason,
             PlantingReason.OnlyOnGraves => "只能在种在墓碑上",
             PlantingReason.OnlyInPool => "只能种在池塘中",
             PlantingReason.OnlyOnGround => "只能种在地面上",
