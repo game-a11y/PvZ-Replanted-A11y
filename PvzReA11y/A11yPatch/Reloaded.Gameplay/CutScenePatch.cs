@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using PvzReA11y.ReplantAPI;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 /// <summary>
 /// CutScene 类的 Harmony 补丁

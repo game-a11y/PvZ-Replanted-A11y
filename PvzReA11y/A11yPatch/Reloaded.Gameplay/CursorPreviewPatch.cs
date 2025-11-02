@@ -2,7 +2,7 @@ using System.Text;
 using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 [HarmonyPatch(typeof(CursorPreview))]
 public class CursorPreviewPatch
@@ -36,7 +36,7 @@ public class CursorPreviewPatch
                 sb.Append(", CurrentPlant=").Append(currentSeedType);
             }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             // sb.Append(", CurrentPlant=Error(").Append(ex.Message).Append(")");
         }

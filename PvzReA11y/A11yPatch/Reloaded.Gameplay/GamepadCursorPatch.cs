@@ -3,7 +3,7 @@ using Il2CppReloaded.Gameplay;
 using PvzReA11y.ReplantAPI;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 [HarmonyPatch(typeof(GamepadCursor))]
 public class GamepadCursorPatch

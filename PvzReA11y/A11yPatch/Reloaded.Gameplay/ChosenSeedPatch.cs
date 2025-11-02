@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 /// <summary>
 /// ChosenSeed类的Harmony补丁，用于监控种子选择和模仿者种子的相关操作

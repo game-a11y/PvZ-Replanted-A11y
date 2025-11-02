@@ -6,7 +6,7 @@ using static Il2CppReloaded.Gameplay.SeedChooserScreen;
 using static MelonLoader.MelonLogger;
 using static UnityEngine.ParticleSystem.PlaybackState;
 
-namespace PvzReA11y.A11yPatch
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay
 {
     /// <summary>
     /// SeedChooserScreen类的Harmony补丁，用于提供种子选择界面的无障碍支持
@@ -217,7 +217,7 @@ namespace PvzReA11y.A11yPatch
         /// <param name="info">种子银行信息</param>
         [HarmonyPatch(nameof(SeedChooserScreen.EnableStartButton))]
         [HarmonyPostfix]
-        public static void EnableStartButton_Postfix(bool theEnabled, SeedChooserScreen.SeedBankInfo info)
+        public static void EnableStartButton_Postfix(bool theEnabled, SeedBankInfo info)
         {
             if (info == null)
             {

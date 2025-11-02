@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 /// <summary>
 /// ImitaterDialog类的Harmony补丁，用于提供模仿者对话框的无障碍支持

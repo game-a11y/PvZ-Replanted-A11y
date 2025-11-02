@@ -3,12 +3,12 @@ using Il2CppReloaded.Gameplay;
 using PvzReA11y.ReplantAPI;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
-[HarmonyPatch(typeof(Il2CppReloaded.Gameplay.Board))]
+[HarmonyPatch(typeof(Board))]
 public class BoardPatch
 {
-    public static Il2CppReloaded.Gameplay.Board cachedBoard;
+    public static Board cachedBoard;
     static bool isBoardInitialized = false;
 
     #region 辅助函数
@@ -17,29 +17,29 @@ public class BoardPatch
     /// </summary>
     static void PrintBoardStaticInfo()
     {
-        if (!BoardPatch.isBoardInitialized)
+        if (!isBoardInitialized)
         {
             Core.gLogger.Msg("Board is not initialized yet.");
             return;
         }
-        if (BoardPatch.cachedBoard is null)
+        if (cachedBoard is null)
         {
             Core.gLogger.Msg("Board is null.");
             return;
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine($"Board#{BoardPatch.cachedBoard?.GetHashCode()} Static Info:");
-        sb.AppendLine($"  NumRows = {BoardPatch.cachedBoard?.GetNumRows()}");
-        sb.AppendLine($"  StageHas6Rows = {BoardPatch.cachedBoard?.StageHas6Rows()}");
-        sb.AppendLine($"  StageIsNight  = {BoardPatch.cachedBoard?.StageIsNight()}");
-        sb.AppendLine($"  StageHasPool  = {BoardPatch.cachedBoard?.StageHasPool()}");
-        sb.AppendLine($"  StageHasFog   = {BoardPatch.cachedBoard?.StageHasFog()}");
-        sb.AppendLine($"  StageHasRoof  = {BoardPatch.cachedBoard?.StageHasRoof()}");
-        sb.AppendLine($"  StageHasNoGrass     = {BoardPatch.cachedBoard?.StageHasNoGrass()}");
-        sb.AppendLine($"  StageHasGraveStones = {BoardPatch.cachedBoard?.StageHasGraveStones()}");
+        sb.AppendLine($"Board#{cachedBoard?.GetHashCode()} Static Info:");
+        sb.AppendLine($"  NumRows = {cachedBoard?.GetNumRows()}");
+        sb.AppendLine($"  StageHas6Rows = {cachedBoard?.StageHas6Rows()}");
+        sb.AppendLine($"  StageIsNight  = {cachedBoard?.StageIsNight()}");
+        sb.AppendLine($"  StageHasPool  = {cachedBoard?.StageHasPool()}");
+        sb.AppendLine($"  StageHasFog   = {cachedBoard?.StageHasFog()}");
+        sb.AppendLine($"  StageHasRoof  = {cachedBoard?.StageHasRoof()}");
+        sb.AppendLine($"  StageHasNoGrass     = {cachedBoard?.StageHasNoGrass()}");
+        sb.AppendLine($"  StageHasGraveStones = {cachedBoard?.StageHasGraveStones()}");
         // UI
-        sb.AppendLine($"  HasProgressMeter = {BoardPatch.cachedBoard?.HasProgressMeter()}");
+        sb.AppendLine($"  HasProgressMeter = {cachedBoard?.HasProgressMeter()}");
         Core.gLogger.Msg(sb.ToString());
     }
 
@@ -48,25 +48,25 @@ public class BoardPatch
     /// </summary>
     static void PrintBoardDynamicInfo()
     {
-        if (!BoardPatch.isBoardInitialized)
+        if (!isBoardInitialized)
         {
             Core.gLogger.Msg("Board is not initialized yet.");
             return;
         }
-        if (BoardPatch.cachedBoard is null)
+        if (cachedBoard is null)
         {
             Core.gLogger.Msg("Board is null.");
             return;
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine($"Board#{BoardPatch.cachedBoard?.GetHashCode()} Dynamic Info:");
-        sb.AppendLine($"  LevelRandSeed = {BoardPatch.cachedBoard?.GetLevelRandSeed()}");
-        sb.AppendLine($"  LiveGargantuarCount = {BoardPatch.cachedBoard?.GetLiveGargantuarCount()}");
-        sb.AppendLine($"  NumSeedsInBank = {BoardPatch.cachedBoard?.GetNumSeedsInBank()}");
-        sb.AppendLine($"  CountSunFlowers = {BoardPatch.cachedBoard?.CountSunFlowers()}");
-        sb.AppendLine($"  GetGraveStoneCount = {BoardPatch.cachedBoard?.GetGraveStoneCount()}");
-        sb.AppendLine($"  CountZombiesOnScreen = {BoardPatch.cachedBoard?.CountZombiesOnScreen()}");
+        sb.AppendLine($"Board#{cachedBoard?.GetHashCode()} Dynamic Info:");
+        sb.AppendLine($"  LevelRandSeed = {cachedBoard?.GetLevelRandSeed()}");
+        sb.AppendLine($"  LiveGargantuarCount = {cachedBoard?.GetLiveGargantuarCount()}");
+        sb.AppendLine($"  NumSeedsInBank = {cachedBoard?.GetNumSeedsInBank()}");
+        sb.AppendLine($"  CountSunFlowers = {cachedBoard?.CountSunFlowers()}");
+        sb.AppendLine($"  GetGraveStoneCount = {cachedBoard?.GetGraveStoneCount()}");
+        sb.AppendLine($"  CountZombiesOnScreen = {cachedBoard?.CountZombiesOnScreen()}");
         Core.gLogger.Msg(sb.ToString());
     }
     #endregion 辅助函数
@@ -74,14 +74,14 @@ public class BoardPatch
     // TODO: 收集当前关卡包含的僵尸类型（FromWave=-2）
     [HarmonyPatch("InitLevel")]
     [HarmonyPostfix]
-    static void InitLevel(Il2CppReloaded.Gameplay.Board __instance)
+    static void InitLevel(Board __instance)
     {
-        if (BoardPatch.cachedBoard != __instance)
+        if (cachedBoard != __instance)
         {
-            BoardPatch.cachedBoard = __instance;
+            cachedBoard = __instance;
             BoardHelper.CacheBoard(cachedBoard);
         }
-        BoardPatch.isBoardInitialized = BoardPatch.cachedBoard is not null;
+        isBoardInitialized = cachedBoard is not null;
 
         Core.gLogger.Msg($"Board#{__instance?.GetHashCode()}.InitLevel()");
 

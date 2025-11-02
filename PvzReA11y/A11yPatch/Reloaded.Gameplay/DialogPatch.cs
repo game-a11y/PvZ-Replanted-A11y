@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using System.Text;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.Reloaded.Gameplay;
 
 /// <summary>
 /// Dialog类的Harmony补丁，用于提供对话框的无障碍支持
