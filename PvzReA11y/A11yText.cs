@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Il2CppReloaded.Gameplay;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,87 @@ namespace PvzReA11y;
 
 internal class A11yText
 {
+    private static readonly Dictionary<SeedType, string> SeedType_ZH = new()
+    {
+        // 主线植物
+        [SeedType.Peashooter] = "豌豆射手",
+        [SeedType.Sunflower] = "向日葵",
+        [SeedType.Cherrybomb] = "樱桃炸弹",
+        [SeedType.Wallnut] = "坚果墙",
+        [SeedType.Potatomine] = "土豆地雷",
+        [SeedType.Snowpea] = "寒冰射手",
+        [SeedType.Chomper] = "食人花",
+        [SeedType.Repeater] = "双发射手",
+
+        // 夜晚植物
+        [SeedType.Puffshroom] = "小喷菇",
+        [SeedType.Sunshroom] = "阳光菇",
+        [SeedType.Fumeshroom] = "大喷菇",
+        [SeedType.Gravebuster] = "墓碑吞噬者",
+        [SeedType.Hypnoshroom] = "催眠菇",
+        [SeedType.Scaredyshroom] = "胆小菇",
+        [SeedType.Iceshroom] = "寒冰菇",
+        [SeedType.Doomshroom] = "毁灭菇",
+
+        // 水面植物
+        [SeedType.Lilypad] = "荷叶",
+        [SeedType.Squash] = "窝瓜",
+        [SeedType.Threepeater] = "三发射手",
+        [SeedType.Tanglekelp] = "缠绕海草",
+        [SeedType.Jalapeno] = "火爆辣椒",
+        [SeedType.Spikeweed] = "地刺",
+        [SeedType.Torchwood] = "火炬树桩",
+        [SeedType.Tallnut] = "高坚果",
+        [SeedType.Seashroom] = "海蘑菇",
+
+        // 工具与功能类
+        [SeedType.Plantern] = "灯笼草",
+        [SeedType.Cactus] = "仙人掌",
+        [SeedType.Blover] = "三叶草",
+        [SeedType.Splitpea] = "裂荚射手",
+        [SeedType.Starfruit] = "杨桃",
+        [SeedType.Pumpkinshell] = "南瓜头",
+        [SeedType.Magnetshroom] = "磁力菇",
+
+        // 屋顶植物
+        [SeedType.Cabbagepult] = "卷心菜投手",
+        [SeedType.Flowerpot] = "花盆",
+        [SeedType.Kernelpult] = "玉米投手",
+        [SeedType.InstantCoffee] = "咖啡豆",
+        [SeedType.Garlic] = "大蒜",
+        [SeedType.Umbrella] = "伞叶",
+        [SeedType.Marigold] = "金盏花",
+        [SeedType.Melonpult] = "西瓜投手",
+
+        // 升级植物
+        [SeedType.Gatlingpea] = "机枪射手",
+        [SeedType.Twinsunflower] = "双子向日葵",
+        [SeedType.Gloomshroom] = "忧郁菇",
+        [SeedType.Cattail] = "香蒲",
+        [SeedType.Wintermelon] = "冬瓜投手",
+        [SeedType.GoldMagnet] = "金磁铁",
+        [SeedType.Spikerock] = "地刺王",
+        [SeedType.Cobcannon] = "玉米加农炮",
+
+        // 其他
+        [SeedType.Imitater] = "模仿者",
+        [SeedType.ExplodeONut] = "爆炸坚果",
+        [SeedType.GiantWallnut] = "巨型坚果",
+        [SeedType.Sprout] = "幼苗",
+        [SeedType.Leftpeater] = "左发射手",
+    };
+
+    /// <summary>
+    /// SeedType 转中文植物名。未映射则返回英文名，None 返回“无”。
+    /// </summary>
+    public static string GetSeedTypeZh(SeedType seedType)
+    {
+        if (SeedType_ZH.TryGetValue(seedType, out var name))
+            return name;
+
+        return seedType == SeedType.None ? "" : seedType.ToString();
+    }
+
     /// <summary>
     /// Selectable 类的名称映射
     /// </summary>
