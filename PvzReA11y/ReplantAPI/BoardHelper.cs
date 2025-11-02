@@ -37,7 +37,7 @@ public static class BoardHelper
     /// </summary>
     /// <param name="playerIdx">玩家索引，默认 0</param>
     /// <returns>当前玩家无法种植的原因</returns>
-    public static string CannotPlantReason(int x, int y,int playerIdx=0)
+    public static string GetGridState(int x, int y,int playerIdx=0)
     {
         if (!HasCachedBoard) return "";
 

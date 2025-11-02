@@ -39,7 +39,7 @@ public class GamepadCursorPatch
 
         // TODO: 获取当前选中的网格状态
         string a11yText = $"(行 {__instance.m_gridY + 1}, 列 {__instance.m_gridX + 1})";
-        string boardGridState = BoardHelper.CannotPlantReason(__instance.m_gridX, __instance.m_gridY, __instance.PlayerIndex);
+        string boardGridState = BoardHelper.GetGridState(__instance.m_gridX, __instance.m_gridY, __instance.PlayerIndex);
         if (!string.IsNullOrEmpty(boardGridState))
         {
             a11yText += $" {boardGridState}";
