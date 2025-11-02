@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using Il2CppSource.Controllers;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.ToDo;
 
 [HarmonyPatch(typeof(ReloadedController))]
 public class ReloadedControllerPatch

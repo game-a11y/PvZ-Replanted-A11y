@@ -3,7 +3,7 @@ using Il2CppReloaded.Gameplay;
 using MelonLoader;
 using System;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.ToDo;
 
 [HarmonyPatch(typeof(GameButton))]
 public class GameButtonPatch

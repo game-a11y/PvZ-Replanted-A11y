@@ -2,7 +2,7 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.ToDo;
 
 /// <summary>
 /// Hook Unity EventSystem 来监控全局焦点变化

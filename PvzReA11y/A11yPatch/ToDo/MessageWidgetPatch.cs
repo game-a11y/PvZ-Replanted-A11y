@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2CppReloaded.Gameplay;
 using PvzReA11y.A11y;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.ToDo;
 
 [HarmonyPatch(typeof(MessageWidget))]
 public class MessageWidgetPatch
