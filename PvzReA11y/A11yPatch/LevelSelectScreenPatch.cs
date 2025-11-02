@@ -44,11 +44,15 @@ namespace PvzReA11y.A11yPatch
 
         // TODO: 鼠标点击会被触发两次。
         [HarmonyPatch(nameof(LevelSelectScreen.SetSelectedLevelIndex), typeof(int))]
-        [HarmonyPostfix]
-        public static void SetSelectedLevelIndex_Postfix(LevelSelectScreen __instance, int level)
+        [HarmonyPrefix]
+        public static void SetSelectedLevelIndex(LevelSelectScreen __instance, int level)
         {
             if (__instance == null) return;
+            // 重复触发
+            if (level == LevelSelectScreen.s_lastCarouselLevelSelection) return;
 
+            // var carouselGroup = __instance.m_selectedCarouselGroup;
+            // string groupName = carouselGroup?.GetType().ToString() ?? "";
             // TODO: 获取现有的文本
             string a11yText = $"关卡 {level + 1}";
             StringBuilder sb = new StringBuilder();
@@ -57,6 +61,7 @@ namespace PvzReA11y.A11yPatch
             sb.Append($", isFirstVisit={__instance.m_isFirstVisit}, levelSelectIsActive={__instance.m_levelSelectIsActive}");
             sb.Append($", reachedCarousel={__instance.ReachedCarousel}");
             sb.Append($", backButton={__instance.m_backButton}");
+            // sb.Append($", carouselGroup.name={groupName}");
             string a11yCtx = sb.ToString();
 
             A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
@@ -70,7 +75,7 @@ namespace PvzReA11y.A11yPatch
             sb.Append($"LevelSelectScreen.ShowCarousel(");
             sb.Append($"newCarouselGroup=LevelSelectCarouselGroup#{carouselGroup?.GetHashCode()})");
             sb.Append($": .levelCarousel=LevelSelectCarousel#{carouselGroup?.levelCarousel?.GetHashCode()}");
-            sb.Append($", .levelCarousel.offset={carouselGroup?.levelCarousel?.m_offset}");
+            // sb.Append($", .levelCarousel.offset={carouselGroup?.levelCarousel?.m_offset}");
             
             Core.gLogger.Msg(sb.ToString());
         }
