@@ -59,7 +59,7 @@ public static class BoardHelper
             // TODO: 检查是否为正常地面
         }
 
-        return plantingReason switch
+        string plantingState = plantingReason switch
         {
             PlantingReason.Ok => "可种植",
 
@@ -84,6 +84,12 @@ public static class BoardHelper
             PlantingReason.VSNotHere => "VS Not Here",
             _ => ""
         };
+
+        // 行有割草机
+        var mower = s_cachedBoard.FindLawnMowerInRow(y);
+        string mowerText = mower != null ? "有割草机" : "无割草机";
+
+        return $"{plantingState}; {mowerText}";
     }
 
     //public static string GetCellStatus(SeedType seedType, int x, int y)
