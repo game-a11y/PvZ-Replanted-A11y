@@ -86,6 +86,7 @@ public class BoardPatch
         Core.gLogger.Msg($"Board#{__instance?.GetHashCode()}.InitLevel()");
 
         PrintBoardStaticInfo();
+        BoardHelper.ResetLevelZombieTypes();
     }
 
     [HarmonyPatch("StartLevel")]
@@ -203,9 +204,9 @@ public class BoardPatch
         string a11yCtx = $"Board.AddZombieInRow():" +
             $" ZombieType={theZombieType}, Row={theRow}, Wave={theFromWave}, shakeBrush={shakeBrush})";
 
-        // 僵尸种类预览
         if (theFromWave < 0)
         {
+            BoardHelper.CacheLevelZombieType(theZombieType);
             Core.gLogger.Msg(a11yCtx);
         }
         else

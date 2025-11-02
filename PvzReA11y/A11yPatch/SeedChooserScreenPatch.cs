@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Il2CppReloaded.Gameplay;
+using PvzReA11y.ReplantAPI;
 using System.Text;
 using static Il2CppReloaded.Gameplay.SeedChooserScreen;
 using static MelonLoader.MelonLogger;
@@ -21,6 +22,7 @@ namespace PvzReA11y.A11yPatch
         public static void InitSurvivalRepick_Postfix()
         {
             Core.gLogger.Msg("SeedChooserScreen.InitSurvivalRepick()");
+            BoardHelper.ResetLevelZombieTypes();
         }
 
         /// <summary>

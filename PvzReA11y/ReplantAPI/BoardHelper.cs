@@ -15,6 +15,16 @@ public static class BoardHelper
 
     public static bool HasCachedBoard => s_cachedBoard != null;
 
+    /* ---- 僵尸预览缓存 ---- */
+    private static System.Collections.Generic.HashSet<ZombieType> s_levelZombieTypes = new();
+    public static void ResetLevelZombieTypes() => s_levelZombieTypes.Clear();
+    public static void CacheLevelZombieType(ZombieType zombieType)
+    {
+        if (!s_levelZombieTypes.Contains(zombieType))
+            s_levelZombieTypes.Add(zombieType);
+    }
+    public static System.Collections.Generic.IReadOnlyCollection<ZombieType> GetLevelZombieTypes() => s_levelZombieTypes;
+
     /// <summary>
     /// 获取当前玩家正在种植的种子类型
     /// </summary>
@@ -94,6 +104,31 @@ public static class BoardHelper
         return $"{gridState}; {plantingState}; {mowerText}";
     }
 
+    public static void AnnounceLevelZombieTypes()
+    {
+        // 关卡介绍时输出本关僵尸类型
+        var types = BoardHelper.GetLevelZombieTypes();
+        if (types != null && types.Count > 0)
+        {
+            var listZh = new System.Text.StringBuilder();
+            bool first = true;
+            foreach (var t in types)
+            {
+                if (!first) listZh.Append('、');
+                listZh.Append(A11yText.GetZombieTypeZh(t));
+                first = false;
+            }
+            string a11yText = $"本关会出现的僵尸类型：{listZh}";
+            string a11yCtx = "CutScene.StartLevelIntro() - LevelZombieTypes";
+
+            A11y.SR.Speak(a11yText, a11yCtx);
+        }
+        else
+        {
+            Core.gLogger.Msg("CutScene.StartLevelIntro() - 无僵尸类型缓存");
+        }
+    }
+
     //public static string GetCellStatus(SeedType seedType, int x, int y)
     //{
     //    if (!HasCachedBoard) return "";
@@ -123,4 +158,5 @@ public static class BoardHelper
     //           $"{plantText}；{gridItemText}；" +
     //           $"冰层={hasIce}；泳池={isPool}；可种植={plantingReason}；";
     //}
+
 }

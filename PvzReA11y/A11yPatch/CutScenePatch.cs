@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Il2CppReloaded.Gameplay;
+using PvzReA11y.ReplantAPI;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -18,6 +19,8 @@ public class CutScenePatch
     public static void StartLevelIntro_Postfix()
     {
         Core.gLogger.Msg("CutScene.StartLevelIntro()");
+        // TODO: 关卡介绍
+        BoardHelper.AnnounceLevelZombieTypes();
     }
 
     /// <summary>
