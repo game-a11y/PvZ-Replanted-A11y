@@ -499,7 +499,7 @@
 		<Compile Include="A11yPatch\PreviewDrawerControllerPatch.cs" />
 		<Compile Include="A11yPatch\ReloadedControllerPatch.cs" />
 		<Compile Include="A11yPatch\SeedChooserScreenPatch.cs" />
-		<Compile Include="A11yPatch\SelectablePatch.cs" />
+		<Compile Include="A11yPatch\UnityEngine.UI\SelectablePatch.cs" />
 		<Compile Include="A11yPatch\SettingsServicePatch.cs" />
 		<Compile Include="A11yPatch\Tekly\PanelViewPatch.cs" />
 		<Compile Include="A11yPatch\UnityEngine.UI\ButtonPatch.cs" />

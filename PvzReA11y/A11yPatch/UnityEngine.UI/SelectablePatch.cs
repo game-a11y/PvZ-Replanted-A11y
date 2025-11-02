@@ -1,9 +1,8 @@
 using HarmonyLib;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static MelonLoader.MelonLogger;
 
-namespace PvzReA11y.A11yPatch;
+namespace PvzReA11y.A11yPatch.UnityEngine.UI;
 
 /// <summary>
 /// Hook Unity UI Selectable 组件的鼠标事件
