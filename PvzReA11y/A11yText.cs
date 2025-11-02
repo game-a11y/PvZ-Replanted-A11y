@@ -77,6 +77,39 @@ internal class A11yText
         [SeedType.GiantWallnut] = "巨型坚果",
         [SeedType.Sprout] = "幼苗",
         [SeedType.Leftpeater] = "左发射手",
+
+        // 小游戏与特殊项
+        [SeedType.BeghouledButtonShuffle] = "宝石迷阵：洗牌按钮",
+        [SeedType.BeghouledButtonCrater] = "宝石迷阵：炸坑按钮",
+        [SeedType.SlotMachineSun] = "老虎机：阳光",
+        [SeedType.SlotMachineDiamond] = "老虎机：钻石",
+        [SeedType.ZombiquariumSnorkel] = "僵尸水族馆：潜水僵尸",
+        [SeedType.ZombiquariumTrophy] = "僵尸水族馆：奖杯",
+
+        // 僵尸类型（用于部分预览/展示）
+        [SeedType.ZombieNormal] = "普通僵尸",
+        [SeedType.ZombieTrafficCone] = "路障僵尸",
+        [SeedType.ZombiePolevaulter] = "撑杆跳僵尸",
+        [SeedType.ZombiePail] = "铁桶僵尸",
+        [SeedType.ZombieLadder] = "梯子僵尸",
+        [SeedType.ZombieDigger] = "矿工僵尸",
+        [SeedType.ZombieBungee] = "蹦极僵尸",
+        [SeedType.ZombieFootball] = "橄榄球僵尸",
+        [SeedType.ZombieBalloon] = "气球僵尸",
+        [SeedType.ZombieScreenDoor] = "铁门僵尸",
+        [SeedType.Zomboni] = "冰车僵尸",
+        [SeedType.ZombiePogo] = "跳跳僵尸",
+        [SeedType.ZombieDancer] = "舞王僵尸",
+        [SeedType.ZombieGargantuar] = "巨人僵尸",
+        [SeedType.ZombieImp] = "小鬼僵尸",
+        [SeedType.ZombieFlag] = "旗帜僵尸",
+        [SeedType.ZombieTrashCan] = "垃圾桶僵尸",
+        [SeedType.ZombieNewspaper] = "读报僵尸",
+        [SeedType.ZombieJackInTheBox] = "小丑僵尸",
+        [SeedType.ZombieCatapult] = "投篮僵尸",
+        [SeedType.ZombieGravestone] = "墓碑僵尸",
+
+        [SeedType.None] = "",
     };
 
     /// <summary>
@@ -87,7 +120,7 @@ internal class A11yText
         if (SeedType_ZH.TryGetValue(seedType, out var name))
             return name;
 
-        return seedType == SeedType.None ? "" : seedType.ToString();
+        return seedType.ToString();
     }
 
     /// <summary>
