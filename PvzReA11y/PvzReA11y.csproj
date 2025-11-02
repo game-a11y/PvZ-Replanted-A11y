@@ -508,11 +508,8 @@
 		<Compile Include="A11y\TolkSafe.cs" />
 		<Compile Include="A11y\TolkMock.cs" />
 		<Compile Include="Core.cs" />
+		<Compile Include="ReplantAPI\BoardHelper.cs" />
 		<Compile Include="Utils.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ReplantAPI\" />
 	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

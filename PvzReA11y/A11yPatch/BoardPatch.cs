@@ -1,13 +1,14 @@
 ﻿using HarmonyLib;
 using Il2CppReloaded.Gameplay;
+using PvzReA11y.ReplantAPI;
 using System.Text;
 
 namespace PvzReA11y.A11yPatch;
 
 [HarmonyPatch(typeof(Il2CppReloaded.Gameplay.Board))]
-internal class BoardPatch
+public class BoardPatch
 {
-    static Il2CppReloaded.Gameplay.Board cachedBoard;
+    public static Il2CppReloaded.Gameplay.Board cachedBoard;
     static bool isBoardInitialized = false;
 
     #region 辅助函数
@@ -78,6 +79,7 @@ internal class BoardPatch
         if (BoardPatch.cachedBoard != __instance)
         {
             BoardPatch.cachedBoard = __instance;
+            BoardHelper.CacheBoard(cachedBoard);
         }
         BoardPatch.isBoardInitialized = BoardPatch.cachedBoard is not null;
 

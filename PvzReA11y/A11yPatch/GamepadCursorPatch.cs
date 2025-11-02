@@ -1,6 +1,7 @@
-using System.Text;
 using HarmonyLib;
 using Il2CppReloaded.Gameplay;
+using PvzReA11y.ReplantAPI;
+using System.Text;
 
 namespace PvzReA11y.A11yPatch;
 
@@ -37,7 +38,12 @@ public class GamepadCursorPatch
         sb.Append($"Enabled: {__instance.Enabled}");
 
         // TODO: 获取当前选中的网格状态
-        string a11yText = $"行 {__instance.m_gridY + 1}, 列 {__instance.m_gridX + 1}";
+        string a11yText = $"(行 {__instance.m_gridY + 1}, 列 {__instance.m_gridX + 1})";
+        string boardGridState = BoardHelper.CannotPlantReason(__instance.m_gridX, __instance.m_gridY, __instance.PlayerIndex);
+        if (!string.IsNullOrEmpty(boardGridState))
+        {
+            a11yText += $" {boardGridState}";
+        }
         string a11yCtx = sb.ToString();
 
         A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
