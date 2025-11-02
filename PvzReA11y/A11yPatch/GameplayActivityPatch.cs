@@ -152,4 +152,77 @@ public class GameplayActivityPatch
     {
         Core.gLogger.Msg("GameplayActivity.OnApplicationQuit()");
     }
+
+    /// <summary>
+    /// CrazyDave 进入对话的后置挂钩
+    /// </summary>
+    [HarmonyPatch(nameof(GameplayActivity.CrazyDaveEnter))]
+    [HarmonyPostfix]
+    public static void CrazyDaveEnter_Postfix()
+    {
+        Core.gLogger.Msg("GameplayActivity.CrazyDaveEnter()");
+    }
+
+    /// <summary>
+    /// CrazyDave 说话消息的后置挂钩
+    /// </summary>
+    [HarmonyPatch(nameof(GameplayActivity.CrazyDaveTalkMessage))]
+    [HarmonyPostfix]
+    public static void CrazyDaveTalkMessage_Postfix(string message)
+    {
+        Core.gLogger.Msg($"GameplayActivity.CrazyDaveTalkMessage(message={message})");
+    }
+
+    /// <summary>
+    /// CrazyDave 离开对话的后置挂钩
+    /// </summary>
+    [HarmonyPatch(nameof(GameplayActivity.CrazyDaveLeave))]
+    [HarmonyPostfix]
+    public static void CrazyDaveLeave_Postfix()
+    {
+        Core.gLogger.Msg("GameplayActivity.CrazyDaveLeave()");
+    }
+
+    /// <summary>
+    /// 新游戏预处理的后置挂钩
+    /// </summary>
+    [HarmonyPatch(nameof(GameplayActivity.PreNewGame))]
+    [HarmonyPostfix]
+    public static void PreNewGame_Postfix(GameMode theGameMode, bool theLookForSavedGame)
+    {
+        Core.gLogger.Msg($"GameplayActivity.PreNewGame(gameMode={theGameMode}, lookForSavedGame={theLookForSavedGame})");
+    }
+
+    // 崩溃
+    /// <summary>
+    /// 切换慢动作的后置挂钩
+    /// </summary>
+    //[HarmonyPatch(nameof(GameplayActivity.ToggleSlowMo))]
+    //[HarmonyPostfix]
+    //public static void ToggleSlowMo_Postfix()
+    //{
+    //    Core.gLogger.Msg("GameplayActivity.ToggleSlowMo()");
+    //}
+    // 崩溃
+    /// <summary>
+    /// 切换快动作的后置挂钩
+    /// </summary>
+    //[HarmonyPatch(nameof(GameplayActivity.ToggleFastMo))]
+    //[HarmonyPostfix]
+    //public static void ToggleFastMo_Postfix()
+    //{
+    //    Core.gLogger.Msg("GameplayActivity.ToggleFastMo()");
+    //}
+
+    // 崩溃
+    /// <summary>
+    /// 打开暂停对话的后置挂钩
+    /// </summary>
+    //[HarmonyPatch(nameof(GameplayActivity.DoPauseDialog))]
+    //[HarmonyPostfix]
+    //public static void DoPauseDialog_Postfix()
+    //{
+    //    Core.gLogger.Msg("GameplayActivity.DoPauseDialog()");
+    //}
+
 }
