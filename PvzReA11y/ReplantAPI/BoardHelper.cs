@@ -83,18 +83,18 @@ public static class BoardHelper
             PlantingReason.OnlyOnGround => "只能种在地面上",
 
             PlantingReason.NeedsPot => "需要花盆",
-            PlantingReason.NotOnArt => "Not On Art",
-            PlantingReason.NotPassedLine => "Not Passed Line",
+            PlantingReason.NotOnArt => "不能种在装饰地块上",
+            PlantingReason.NotPassedLine => "不能越过分界线",
             PlantingReason.NeedsUpgrade => "需要升级",
             PlantingReason.NotOnGrave => "不能种在墓碑上",
-            PlantingReason.NotOnCrater => "不能种在 crater 上",
+            PlantingReason.NotOnCrater => "不能种在坑洞上",
             PlantingReason.NotOnWater => "不能种在水上",
 
             PlantingReason.NeedsGround => "需要地面",
-            PlantingReason.NeedsSleeping => "需要睡眠",
+            PlantingReason.NeedsSleeping => "（夜间植物）需要睡眠",
 
-            PlantingReason.VSSuddenDeath => "VS Sudden Death",
-            PlantingReason.VSNotHere => "VS Not Here",
+            PlantingReason.VSSuddenDeath => "对战模式：突然死亡规则",
+            PlantingReason.VSNotHere => "对战模式：此处不可种植",
             _ => ""
         };
 
