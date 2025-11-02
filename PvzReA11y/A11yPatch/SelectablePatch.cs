@@ -103,6 +103,24 @@ internal class SelectablePatch
             a11tCtx += $";  objectText=''";
         }
 
+        var PopupButtonNames = new HashSet<string>()
+        {
+            "P_BacicButton_Yes",
+            "P_BacicButton_No",
+            // 退出 / 取消
+            "P_BacicButton_Quit",
+            //"P_BacicButton_Cancel",
+
+            // 继续 / 重玩 / 取消
+            "P_BacicButton_Continue",
+            //"P_BacicButton_RestartLevel",
+            // 离开 / 取消
+            "P_BacicButton_Leave",
+        };
+        // 弹窗的按钮会自动获得焦点，因此需要排队播报
+        bool bNeedQueueOutput = objParent == "Buttons"
+            && PopupButtonNames.Contains(objectName);
+
         // 始终查询 A11y 文本
         a11yText = GetA11yText(a11yText);
         if (NeedSkipA11yOutput(instance))
@@ -110,9 +128,14 @@ internal class SelectablePatch
             Core.gLogger.Msg($"{eventName}: '{a11yText}'");
             Core.gLogger.Msg($"    {a11tCtx}");
         }
+        else if (bNeedQueueOutput)
+        {
+            //a11tCtx = $"[{eventName}] {a11tCtx}";
+            A11y.SR.SpeakQueue(a11yText, a11tCtx);
+        }
         else
         {
-            a11tCtx = $"[{eventName}] {a11tCtx}";
+            //a11tCtx = $"[{eventName}] {a11tCtx}";
             A11y.SR.SpeakInterrupt(a11yText, a11tCtx);
         }
     }
