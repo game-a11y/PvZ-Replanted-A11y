@@ -197,7 +197,7 @@ internal class BoardPatch
     [HarmonyPostfix]
     static void AddZombieInRow(ZombieType theZombieType, int theRow, int theFromWave, bool shakeBrush)
     {
-        string a11yText = $"第 {theRow+1} 行，{theZombieType} 僵尸";
+        string a11yText = $"第 {theRow+1} 行，{A11yText.GetZombieTypeZh(theZombieType)} 僵尸";
         string a11yCtx = $"Board.AddZombieInRow():" +
             $" ZombieType={theZombieType}, Row={theRow}, Wave={theFromWave}, shakeBrush={shakeBrush})";
 
