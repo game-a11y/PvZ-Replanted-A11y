@@ -3,6 +3,8 @@
 An accessibility mod for
 [Plants vs. Zombies™: Replanted (Steam Version)](https://store.steampowered.com/app/3654560/_/)
 
+目前的开发进度，请参阅：[开发进度](PvzReA11yMod/A11yDocs/90更新日志.txt)
+
 ## Dependencies
 
 - [MelonLoader v0.7.1+](https://melonwiki.xyz/), Il2Cpp game with .NET 6.0 framework
