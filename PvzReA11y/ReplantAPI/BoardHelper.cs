@@ -1,4 +1,6 @@
 using Il2CppReloaded.Gameplay;
+using Il2CppTekly.DataModels.Binders;
+using System.Text;
 
 namespace PvzReA11y.ReplantAPI;
 
@@ -129,34 +131,73 @@ public static class BoardHelper
         }
     }
 
-    //public static string GetCellStatus(SeedType seedType, int x, int y)
-    //{
-    //    if (!HasCachedBoard) return "";
+    /// <summary>
+    /// 输出当前关卡的关卡信息与植物网格信息（简要语音+详细日志）
+    /// </summary>
+    public static void AnnounceLevelIntro()
+    {
+        if (!HasCachedBoard) return;
 
-    //    // 植物
-    //    var plant = s_cachedBoard.GetTopPlantAt(x, y, PlantPriority.Any);
-    //    string plantText = plant != null ? A11yText.GetSeedTypeZh(plant.mSeedType) : "无植物";
+        var board = s_cachedBoard;
 
-    //    // 网格物品（花盆、睡莲、墓碑等）
-    //    var gridItem = s_cachedBoard.GetGridItemAt(GridItemType.Gravestone, x, y);
-    //    string gridItemText = gridItem != null ? gridItem.mGridItemType.ToString() : "无网格物品";
+        // 关卡信息
+        int numRows = board.GetNumRows();
+        bool isNight = board.StageIsNight();
+        bool hasPool = board.StageHasPool();
+        bool hasRoof = board.StageHasRoof();
+        bool hasFog = board.StageHasFog();
+        bool hasGraves = board.StageHasGraveStones();
+        bool noGrass = board.StageHasNoGrass();
+        bool hasProgress = board.HasProgressMeter();
 
-    //    // 冰层
-    //    bool hasIce = s_cachedBoard.IsIceAt(x, y);
+        StringBuilder a11ySb = new StringBuilder();
+        a11ySb.Append($"{(isNight ? "夜晚" : "白天")}");
+        a11ySb.Append($"{(hasPool ? "、泳池" : "")}");
+        a11ySb.Append($"{(hasRoof ? "、屋顶" : "")}");
+        a11ySb.Append($"{(hasFog ? "、浓雾" : "")}");
+        a11ySb.Append($"{(noGrass ? "、无草皮" : "")}");
+        a11ySb.Append($"{(hasGraves ? "、有墓碑" : "")}");
+        // TODO: 草地行数不准确
+        //a11ySb.Append($"，行数 {numRows}");
 
-    //    // 泳池格（有的 API 只按 y 判断，如果有重载优先用 x,y 版本）
-    //    bool isPool = s_cachedBoard.IsPoolSquare(x, y);
+        // 统计泳池行、草地可种植行、是否存在墓碑与 ScaryPot
+        var poolRows = new System.Collections.Generic.List<int>(); // 1-based 行号
+        bool hasAnyScaryPot = false;
 
-    //    // 是否可种植
-    //    var plantingReason = s_cachedBoard.CanPlantAt(x, y, seedType);
+        int numCols = 9; // PvZ 标准 9 列
+        for (int y = 0; y < numRows; y++)
+        {
+            bool isPoolRow = false;
 
-    //    // 行有割草机
-    //    //var mower = s_cachedBoard.FindLawnMowerInRow(y);
-    //    //bool hasMower = mower != null;
+            for (int x = 0; x < numCols; x++)
+            {
+                // 泳池格判断（按格）
+                if (board.IsPoolSquare(x, y))
+                {
+                    isPoolRow = true;
+                }
 
-    //    return $"行 {y + 1}, 列 {x + 1}：" +
-    //           $"{plantText}；{gridItemText}；" +
-    //           $"冰层={hasIce}；泳池={isPool}；可种植={plantingReason}；";
-    //}
+                // 网格物品存在性（关卡是否有墓碑、ScaryPot）
+                var scaryPot = board.GetGridItemAt(GridItemType.ScaryPot, x, y);
+                if (scaryPot != null) hasAnyScaryPot = true;
+            }
 
+            if (isPoolRow)
+            {
+                poolRows.Add(y + 1); // 输出使用 1-based 行号
+            }
+        }
+        
+        // 泳池行
+        if (poolRows.Count > 0) a11ySb.Append($"；泳池行：{string.Join(", ", poolRows)}");
+        // 花瓶
+        if (hasAnyScaryPot) a11ySb.Append($"；有惊吓花瓶");
+
+        var ctx = new StringBuilder();
+        ctx.Append($"[AnnounceLevelIntro] NumRows={numRows}, NoGrass={noGrass}");
+        ctx.Append($", PoolRows={(poolRows.Count > 0 ? string.Join(",", poolRows) : "None")}");
+        ctx.Append($", HasScaryPot={hasAnyScaryPot}");
+
+        A11y.SR.Speak(a11ySb.ToString(), ctx.ToString());
+    }
 }

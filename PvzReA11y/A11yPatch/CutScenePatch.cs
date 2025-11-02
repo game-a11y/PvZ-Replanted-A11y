@@ -19,7 +19,7 @@ public class CutScenePatch
     public static void StartLevelIntro_Postfix()
     {
         Core.gLogger.Msg("CutScene.StartLevelIntro()");
-        // TODO: 关卡介绍
+        BoardHelper.AnnounceLevelIntro();
         BoardHelper.AnnounceLevelZombieTypes();
     }
 
@@ -40,6 +40,7 @@ public class CutScenePatch
     [HarmonyPostfix]
     public static void AdvanceCrazyDaveDialog_Postfix(bool theJustSkipping)
     {
+        // TODO: 输出戴夫的话
         Core.gLogger.Msg($"CutScene.AdvanceCrazyDaveDialog(JustSkipping={theJustSkipping})");
     }
 
