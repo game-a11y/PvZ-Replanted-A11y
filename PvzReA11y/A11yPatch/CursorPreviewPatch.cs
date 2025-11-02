@@ -7,7 +7,6 @@ namespace PvzReA11y.A11yPatch;
 [HarmonyPatch(typeof(CursorPreview))]
 public class CursorPreviewPatch
 {
-    // TODO: 输出当前植物名
     /// <summary>
     /// 游戏内植物选择，光标预览更新时的后置钩子
     /// </summary>
@@ -26,7 +25,25 @@ public class CursorPreviewPatch
         sb.Append(", Player").Append(__instance.PlayerIndex);
         sb.Append(", Offset=").Append(__instance.mOffsetY.ToString("F1"));
         sb.Append(", Controllers=").Append(__instance.mColumnControllers?.Count ?? 0);
-        
-        Core.gLogger.Msg(sb.ToString());
+
+        // 获取当前选定的植物类型
+        SeedType currentSeedType = SeedType.None;
+        try
+        {
+            if (__instance.mController?.m_previewDrawer != null)
+            {
+                currentSeedType = __instance.mController.m_previewDrawer.m_seedType;
+                sb.Append(", CurrentPlant=").Append(currentSeedType);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            // sb.Append(", CurrentPlant=Error(").Append(ex.Message).Append(")");
+        }
+    
+        string a11yText = $"植物 {currentSeedType}";
+        string a11yCtx = sb.ToString();
+
+        A11y.SR.SpeakInterrupt(a11yText, a11yCtx);
     }
 }
